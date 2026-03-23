@@ -5,489 +5,418 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HINA – Home Ice North America | Custom Ice Rink Installation</title>
 <meta name="description" content="Home Ice North America professionally installs refrigerated ice rinks for residential and commercial use. Nationwide supply and install, full service in the NY Tri-State area.">
-<script>
-  const LOGO_URL = "https://i.imgur.com/A6TnMMG.png";
-</script>
 <style>
-  :root{
-    --navy:#1B3F6E;--navy-dark:#122d52;--navy-light:#2a5492;
-    --red:#C0392B;--red-dark:#a93226;
-    --ice:#EBF5FF;--ice-mid:#d0e8f7;
-    --white:#fff;--off-white:#f8f9fb;
-    --gray:#555;--dark:#1a1a1a;
-    --font:'Segoe UI',system-ui,sans-serif;
-    --radius:10px;--shadow:0 4px 24px rgba(0,0,0,.12);
-    --focus:#f0b429;
-    --nav-h:64px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:var(--font);color:var(--dark);background:var(--white);overflow-x:hidden}
+:root{
+  --navy:#1B3F6E;--navy-dark:#122d52;
+  --red:#C0392B;--red-dark:#a93226;
+  --ice:#EBF5FF;--ice-mid:#d0e8f7;
+  --white:#fff;--off-white:#f8f9fb;
+  --gray:#555;--dark:#1a1a1a;
+  --font:'Segoe UI',system-ui,sans-serif;
+  --radius:10px;--shadow:0 4px 24px rgba(0,0,0,.12);
+  --focus:#f0b429;
+  --nav-h:64px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--dark);background:var(--white);overflow-x:hidden}
 
-  /* ── SKIP NAV ── */
-  .skip-link{position:absolute;top:-100px;left:20px;background:var(--focus);color:#000;padding:10px 18px;border-radius:6px;font-weight:700;font-size:.9rem;text-decoration:none;z-index:9999;transition:top .2s}
-  .skip-link:focus{top:10px}
+/* ── SKIP LINK ── */
+.skip-link{position:absolute;top:-100px;left:20px;background:var(--focus);color:#000;padding:10px 18px;border-radius:6px;font-weight:700;font-size:.9rem;text-decoration:none;z-index:99999;transition:top .2s}
+.skip-link:focus{top:10px}
 
-  /* ── FOCUS STYLES ── */
-  :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
-  a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+/* ══════════════════════════════
+   NAV — completely isolated
+══════════════════════════════ */
+#site-nav{
+  position:fixed;top:0;left:0;right:0;
+  height:var(--nav-h);
+  background:#1B3F6E;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+  box-shadow:0 2px 16px rgba(0,0,0,.3);
+  z-index:99999;
+}
+#site-nav .nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+#site-nav .nav-logo img{height:40px;width:auto;display:block;filter:brightness(0) invert(1)}
+#site-nav ul{display:flex;gap:4px;list-style:none;align-items:center}
+#site-nav ul a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.82rem;font-weight:500;padding:6px 14px;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;white-space:nowrap;cursor:pointer;display:block}
+#site-nav ul a:hover,#site-nav ul a.active{color:#fff;background:rgba(255,255,255,.15)}
+#site-nav ul a.nav-cta{background:#C0392B!important;color:#fff!important;font-weight:700!important;padding:8px 18px!important}
+#site-nav ul a.nav-cta:hover{background:#a93226!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .25s,opacity .25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-  /* ── NAV ── */
-  nav{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1B3F6E;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:var(--nav-h);box-shadow:0 2px 16px rgba(0,0,0,.3);isolation:isolate}
-  .nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
-  .nav-logo img{height:40px;width:auto;display:block;filter:brightness(0) invert(1)}
+/* Mobile drawer */
+#mobile-drawer{
+  display:none;
+  position:fixed;
+  top:var(--nav-h);left:0;right:0;
+  background:#122d52;
+  flex-direction:column;
+  padding:12px 16px 20px;
+  gap:4px;
+  z-index:99998;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+#mobile-drawer.open{display:flex}
+#mobile-drawer a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.9rem;font-weight:500;padding:12px 16px;border-radius:8px;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:background .2s}
+#mobile-drawer a:hover{background:rgba(255,255,255,.1);color:#fff}
+#mobile-drawer a.mob-cta{background:#C0392B;color:#fff;font-weight:700;text-align:center;margin-top:4px}
+#mobile-drawer a.mob-cta:hover{background:#a93226}
 
-  /* Desktop nav links */
-  .nav-links{display:flex;gap:4px;list-style:none;align-items:center;flex-wrap:nowrap}
-  .nav-links a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.82rem;font-weight:500;padding:6px 14px;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;white-space:nowrap;cursor:pointer}
-  .nav-links a:hover,.nav-links a[aria-current="page"]{color:#fff;background:rgba(255,255,255,.15)}
-  .nav-cta{background:#C0392B!important;color:#fff!important;border-radius:6px!important;padding:8px 18px!important;font-weight:700!important}
-  .nav-cta:hover{background:#a93226!important}
+@media(max-width:900px){
+  #site-nav{padding:0 20px}
+  #site-nav ul{display:none}
+  .hamburger{display:flex}
+}
 
-  /* Hamburger button */
-  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:1001}
-  .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .25s, opacity .25s}
-  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  .hamburger.open span:nth-child(2){opacity:0}
-  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* ══════════════════════════════
+   PAGE WRAPPER
+══════════════════════════════ */
+#page-wrapper{
+  margin-top:var(--nav-h);
+}
 
-  /* Mobile drawer */
-  .mobile-menu{
-    display:none;
-    position:fixed;
-    top:var(--nav-h);
-    left:0;right:0;
-    background:#122d52;
-    flex-direction:column;
-    padding:12px 16px 20px;
-    gap:4px;
-    box-shadow:0 8px 24px rgba(0,0,0,.3);
-    z-index:9998;
-  }
-  .mobile-menu.open{display:flex}
-  .mobile-menu a{
-    color:rgba(255,255,255,.85);
-    text-decoration:none;
-    font-size:.9rem;
-    font-weight:500;
-    padding:12px 16px;
-    border-radius:8px;
-    letter-spacing:.5px;
-    text-transform:uppercase;
-    transition:background .2s;
-    cursor:pointer;
-  }
-  .mobile-menu a:hover{background:rgba(255,255,255,.1);color:#fff}
-  .mobile-menu .mob-cta{background:#C0392B;color:#fff;margin-top:4px;font-weight:700;text-align:center}
-  .mobile-menu .mob-cta:hover{background:#a93226}
+/* ══════════════════════════════
+   SECTIONS (shared)
+══════════════════════════════ */
+section{padding:80px 40px}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:16px}
+.section-sub{font-size:1.05rem;color:var(--gray);line-height:1.8;max-width:680px}
+.btn{display:inline-block;padding:14px 32px;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;border:none;text-decoration:none;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;font-family:var(--font)}
+.btn-primary{background:var(--red);color:var(--white)}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(192,57,43,.4)}
+.btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.7)}
+.btn-outline:hover{background:rgba(255,255,255,.12);border-color:var(--white);transform:translateY(-2px)}
+.btn-white{background:var(--white);color:var(--red)}
+.btn-white:hover{background:var(--ice);transform:translateY(-2px)}
 
-  @media(max-width:900px){
-    nav{padding:0 20px}
-    .nav-links{display:none}
-    .hamburger{display:flex}
-  }
+/* split layout */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.split-img{border-radius:14px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3;background:var(--ice-mid)}
+.split-img img{width:100%;height:100%;object-fit:cover;display:block}
 
-  /* ── PAGES ── */
-  .page{
-    display:none!important;
-    visibility:hidden;
-    position:absolute;
-    top:-99999px;
-    left:-99999px;
-    pointer-events:none;
-    padding-top:var(--nav-h);
-    min-height:100vh;
-    width:100%;
-  }
-  .page.active{
-    display:block!important;
-    visibility:visible;
-    position:relative;
-    top:0;
-    left:0;
-    pointer-events:auto;
-  }
+/* cta banner */
+.cta-banner{background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);padding:60px 40px;text-align:center}
+.cta-banner h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:var(--white);margin-bottom:12px}
+.cta-banner p{color:rgba(255,255,255,.9);font-size:1rem;margin-bottom:28px}
 
-  /* ── HERO ── */
-  .hero{position:relative;height:calc(100vh - var(--nav-h));min-height:540px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-  .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,63,110,.82) 0%,rgba(0,0,0,.5) 100%);z-index:1}
-  .hero-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,var(--navy) 0%,#0d2645 60%,#1a3a6e 100%);display:flex;align-items:center;justify-content:center;z-index:0}
-  .hero-logo{max-width:320px;width:60%;filter:brightness(0) invert(1);opacity:.15}
-  .hero-yt-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-  .hero-yt-wrap iframe{position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:0}
-  .hero-content{position:relative;z-index:2;text-align:center;padding:0 20px;max-width:900px}
-  .hero-badge{display:inline-block;background:rgba(192,57,43,.9);color:var(--white);font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px}
-  .hero-title{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,.4)}
-  .hero-sub{font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.85);margin-bottom:12px;font-style:italic}
-  .hero-desc{font-size:clamp(.9rem,1.8vw,1.1rem);color:rgba(255,255,255,.75);margin-bottom:36px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.7}
-  .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .btn{display:inline-block;padding:14px 32px;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;border:none;text-decoration:none;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;font-family:var(--font)}
-  .btn-primary{background:var(--red);color:var(--white)}
-  .btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(192,57,43,.4)}
-  .btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.7)}
-  .btn-outline:hover{background:rgba(255,255,255,.12);border-color:var(--white);transform:translateY(-2px)}
-  .btn-white{background:var(--white);color:var(--red)}
-  .btn-white:hover{background:var(--ice);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
-  .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;text-align:center;color:rgba(255,255,255,.6);font-size:.75rem;letter-spacing:1px;animation:bounce 2s infinite}
-  .scroll-arrow{display:block;width:20px;height:20px;border-right:2px solid rgba(255,255,255,.5);border-bottom:2px solid rgba(255,255,255,.5);transform:rotate(45deg);margin:6px auto 0}
-  @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+/* stats */
+.stats-bar{background:var(--ice);padding:48px 40px;border-top:3px solid var(--red)}
+.stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center}
+.stat-num{font-size:2.6rem;font-weight:800;color:var(--navy)}
+.stat-label{font-size:.82rem;color:var(--gray);font-weight:500;letter-spacing:.5px;margin-top:4px}
 
-  /* ── SECTIONS ── */
-  section{padding:80px 40px}
-  .section-inner{max-width:1200px;margin:0 auto}
-  .section-label{font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
-  .section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:16px}
-  .section-sub{font-size:1.05rem;color:var(--gray);line-height:1.8;max-width:680px}
+/* services */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.service-card{background:var(--off-white);border-radius:var(--radius);padding:36px 28px;border-top:4px solid transparent;transition:all .25s;cursor:pointer}
+.service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-top-color:var(--red)}
+.service-icon{width:52px;height:52px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.service-icon svg{width:26px;height:26px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.service-card h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+.service-card p{font-size:.88rem;color:var(--gray);line-height:1.7}
 
-  /* ── VIDEO SECTION ── */
-  .video-section{background:var(--navy);padding:80px 40px}
-  .video-section .section-title{color:var(--white)}
-  .video-section .section-label{color:#7db3e8}
-  .video-section .section-sub{color:rgba(255,255,255,.7)}
-  .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:44px}
-  .video-card{background:rgba(255,255,255,.07);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.1);transition:transform .2s,box-shadow .2s}
-  .video-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
-  .video-thumb{position:relative;aspect-ratio:16/9;background:#0d2645;overflow:hidden}
-  .video-thumb video{width:100%;height:100%;object-fit:cover}
-  .video-info{padding:16px 18px}
-  .video-info h3{color:var(--white);font-size:.95rem;font-weight:600;margin-bottom:4px}
-  .video-info p{color:rgba(255,255,255,.6);font-size:.82rem;line-height:1.5}
+/* benefits */
+.benefits-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.benefit-item{display:flex;align-items:flex-start;gap:14px;background:var(--white);border-radius:8px;padding:18px;box-shadow:0 2px 8px rgba(27,63,110,.07)}
+.benefit-icon{width:36px;height:36px;background:var(--red);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.benefit-icon::after{content:'';display:block;width:16px;height:2px;background:var(--white);box-shadow:0 4px 0 var(--white),0 -4px 0 var(--white)}
 
-  /* ── STATS ── */
-  .stats-bar{background:var(--ice);padding:48px 40px;border-top:3px solid var(--red)}
-  .stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
-  .stat-num{font-size:2.6rem;font-weight:800;color:var(--navy)}
-  .stat-label{font-size:.82rem;color:var(--gray);font-weight:500;letter-spacing:.5px;margin-top:4px}
+/* testimonials */
+.testimonials-section{background:var(--navy);padding:80px 40px}
+.testimonials-section .section-title{color:var(--white)}
+.testimonials-section .section-label{color:#7db3e8}
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.testimonial{background:rgba(255,255,255,.07);border-radius:var(--radius);padding:32px 26px;border:1px solid rgba(255,255,255,.1)}
+.puck{width:36px;height:14px;background:var(--red);border-radius:7px;margin-bottom:20px;position:relative}
+.puck::before,.puck::after{content:'';position:absolute;top:50%;width:8px;height:8px;background:var(--red);border-radius:50%;transform:translateY(-50%)}
+.puck::before{left:-10px}.puck::after{right:-10px}
+.testimonial blockquote{font-size:.92rem;color:rgba(255,255,255,.85);line-height:1.75;font-style:italic;margin-bottom:20px}
+.testimonial cite{font-size:.8rem;color:#7db3e8;font-weight:700;font-style:normal;letter-spacing:.5px}
 
-  /* ── SERVICES ── */
-  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-  .service-card{background:var(--off-white);border-radius:var(--radius);padding:36px 28px;border-top:4px solid transparent;transition:all .25s;cursor:pointer}
-  .service-card:hover,.service-card:focus-within{transform:translateY(-6px);box-shadow:var(--shadow);border-top-color:var(--red)}
-  .service-icon{width:52px;height:52px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex-shrink:0}
-  .service-icon svg{width:26px;height:26px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .service-card h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:10px}
-  .service-card p{font-size:.88rem;color:var(--gray);line-height:1.7}
+/* steps */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.step{background:var(--white);border-radius:var(--radius);padding:32px 24px;box-shadow:0 2px 12px rgba(27,63,110,.08)}
+.step-num{width:44px;height:44px;background:var(--red);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin-bottom:16px}
+.step h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.step p{font-size:.86rem;color:var(--gray);line-height:1.65}
 
-  /* ── STEPS ── */
-  .process-section{background:var(--ice)}
-  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-  .step{background:var(--white);border-radius:var(--radius);padding:32px 24px;box-shadow:0 2px 12px rgba(27,63,110,.08)}
-  .step-num{width:44px;height:44px;background:var(--red);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin-bottom:16px;flex-shrink:0}
-  .step h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px}
-  .step p{font-size:.86rem;color:var(--gray);line-height:1.65}
+/* video */
+.video-section{background:var(--navy);padding:80px 40px}
+.video-section .section-title{color:var(--white)}
+.video-section .section-label{color:#7db3e8}
+.video-section .section-sub{color:rgba(255,255,255,.7)}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:44px}
+.video-card{background:rgba(255,255,255,.07);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.1);transition:transform .2s}
+.video-card:hover{transform:translateY(-4px)}
+.video-thumb{aspect-ratio:16/9;background:#0d2645;overflow:hidden}
+.video-thumb iframe{width:100%;height:100%;border:0;display:block}
+.video-info{padding:16px 18px}
+.video-info h3{color:var(--white);font-size:.95rem;font-weight:600;margin-bottom:4px}
+.video-info p{color:rgba(255,255,255,.6);font-size:.82rem;line-height:1.5}
 
-  /* ── SPLIT ── */
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-  .split.reverse{direction:rtl}
-  .split.reverse>*{direction:ltr}
-  .split-img{border-radius:14px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3;background:var(--ice-mid);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:.85rem;font-weight:500;text-align:center;padding:20px}
-  .split-text .section-title{font-size:clamp(1.5rem,3vw,2.2rem)}
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.gallery-item{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;position:relative;cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}
+.gallery-item:hover img{transform:scale(1.03)}
+.gallery-item-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(27,63,110,.85));color:white;font-size:.8rem;font-weight:600;padding:16px 12px 10px;text-align:center}
 
-  /* ── BENEFITS ── */
-  .benefits-bg{background:var(--ice)}
-  .benefits-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
-  .benefit-item{display:flex;align-items:flex-start;gap:14px;background:var(--white);border-radius:8px;padding:18px;box-shadow:0 2px 8px rgba(27,63,110,.07)}
-  .benefit-icon{width:36px;height:36px;background:var(--red);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-  .benefit-icon::after{content:'';display:block;width:16px;height:2px;background:var(--white);box-shadow:0 4px 0 var(--white),0 -4px 0 var(--white)}
-  .benefit-item h4{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px}
-  .benefit-item p{font-size:.82rem;color:var(--gray);line-height:1.5}
+/* team */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+.team-card{border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.1)}
+.team-photo{aspect-ratio:1;background:var(--ice-mid);display:flex;align-items:center;justify-content:center}
+.team-info{background:var(--navy);padding:18px 20px}
+.team-info h3{color:var(--white);font-size:1rem;font-weight:700}
+.team-info p{color:#7db3e8;font-size:.82rem;margin-top:3px}
 
-  /* ── TESTIMONIALS ── */
-  .testimonials-section{background:var(--navy);padding:80px 40px}
-  .testimonials-section .section-title{color:var(--white)}
-  .testimonials-section .section-label{color:#7db3e8}
-  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-  .testimonial{background:rgba(255,255,255,.07);border-radius:var(--radius);padding:32px 26px;border:1px solid rgba(255,255,255,.1)}
-  .puck{width:36px;height:14px;background:var(--red);border-radius:7px;margin-bottom:20px;position:relative}
-  .puck::before,.puck::after{content:'';position:absolute;top:50%;width:8px;height:8px;background:var(--red);border-radius:50%;transform:translateY(-50%)}
-  .puck::before{left:-10px}.puck::after{right:-10px}
-  .testimonial blockquote{font-size:.92rem;color:rgba(255,255,255,.85);line-height:1.75;font-style:italic;margin-bottom:20px}
-  .testimonial cite{font-size:.8rem;color:#7db3e8;font-weight:700;font-style:normal;letter-spacing:.5px}
+/* areas */
+.areas-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.area-tag{display:flex;align-items:center;gap:8px;background:var(--navy);color:var(--white);border-radius:6px;padding:10px 16px;font-size:.82rem;font-weight:600;letter-spacing:.5px}
+.area-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0}
 
-  /* ── TEAM ── */
-  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
-  .team-card{border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.1)}
-  .team-photo{aspect-ratio:1;background:var(--ice-mid);display:flex;align-items:center;justify-content:center}
-  .team-photo svg{width:80px;height:80px;opacity:.4}
-  .team-info{background:var(--navy);padding:18px 20px}
-  .team-info h3{color:var(--white);font-size:1rem;font-weight:700}
-  .team-info p{color:#7db3e8;font-size:.82rem;margin-top:3px}
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:48px}
+.contact-form{background:var(--ice);border-radius:var(--radius);padding:40px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.form-group label{font-size:.82rem;font-weight:600;color:var(--navy)}
+.form-group input,.form-group textarea,.form-group select{border:1.5px solid #c8d8ec;border-radius:7px;padding:11px 14px;font-size:.9rem;font-family:var(--font);background:var(--white);color:var(--dark);transition:border-color .2s;outline:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--navy)}
+.form-group textarea{resize:vertical;min-height:120px}
+.contact-detail{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
+.contact-icon{width:42px;height:42px;background:var(--navy);border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.contact-icon svg{width:20px;height:20px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.contact-detail strong{display:block;font-size:.88rem;color:var(--navy);margin-bottom:2px}
+.contact-detail span{font-size:.85rem;color:var(--gray)}
 
-  /* ── AREAS ── */
-  .areas-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-  .area-tag{display:flex;align-items:center;gap:8px;background:var(--navy);color:var(--white);border-radius:6px;padding:10px 16px;font-size:.82rem;font-weight:600;letter-spacing:.5px}
-  .area-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0}
+/* social */
+.social-links{display:flex;gap:12px}
+.social-links a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .2s}
+.social-links a:hover{background:rgba(255,255,255,.15)}
+.social-links svg{width:17px;height:17px;fill:rgba(255,255,255,.65)}
+.social-links a:hover svg{fill:#fff}
 
-  /* ── CTA BANNER ── */
-  .cta-banner{background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);padding:60px 40px;text-align:center}
-  .cta-banner h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:var(--white);margin-bottom:12px}
-  .cta-banner p{color:rgba(255,255,255,.9);font-size:1rem;margin-bottom:28px}
+/* preowned */
+.preowned-features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.po-feat{background:var(--ice);border-radius:var(--radius);padding:28px 22px;border-left:4px solid var(--navy)}
+.po-feat h4{font-weight:700;color:var(--navy);margin-bottom:8px;font-size:.95rem}
+.po-feat p{font-size:.85rem;color:var(--gray);line-height:1.6}
 
-  /* ── CONTACT ── */
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:48px}
-  .contact-form{background:var(--ice);border-radius:var(--radius);padding:40px}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-  .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-  .form-group label{font-size:.82rem;font-weight:600;color:var(--navy);letter-spacing:.3px}
-  .form-group input,.form-group textarea,.form-group select{border:1.5px solid #c8d8ec;border-radius:7px;padding:11px 14px;font-size:.9rem;font-family:var(--font);background:var(--white);color:var(--dark);transition:border-color .2s;outline:none}
-  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--navy);outline:3px solid var(--focus);outline-offset:2px}
-  .form-group textarea{resize:vertical;min-height:120px}
-  .contact-detail{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
-  .contact-icon{width:42px;height:42px;background:var(--navy);border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-  .contact-icon svg{width:20px;height:20px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .contact-detail strong{display:block;font-size:.88rem;color:var(--navy);margin-bottom:2px}
-  .contact-detail span{font-size:.85rem;color:var(--gray)}
+/* portal */
+.portal-login-wrap{min-height:calc(100vh - var(--nav-h));display:flex;align-items:center;justify-content:center;background:var(--navy);padding:40px 20px}
+.portal-login-box{background:var(--white);border-radius:16px;padding:48px 40px;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
 
-  /* ── PRE-OWNED ── */
-  .preowned-features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
-  .po-feat{background:var(--ice);border-radius:var(--radius);padding:28px 22px;border-left:4px solid var(--navy)}
-  .po-feat h4{font-weight:700;color:var(--navy);margin-bottom:8px;font-size:.95rem}
-  .po-feat p{font-size:.85rem;color:var(--gray);line-height:1.6}
+/* footer */
+footer{background:var(--navy-dark);padding:60px 40px 30px}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-logo{height:48px;width:auto;filter:brightness(0) invert(1);opacity:.85;margin-bottom:12px;display:block}
+.footer-brand p{color:rgba(255,255,255,.5);font-size:.85rem;line-height:1.7;margin-top:4px}
+.footer-col h3{color:var(--white);font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.85rem;transition:color .2s;cursor:pointer}
+.footer-col a:hover{color:var(--white)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{color:rgba(255,255,255,.4);font-size:.8rem}
+.footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+.footer-bottom a:hover{color:rgba(255,255,255,.7)}
 
-  /* ── GALLERY ── */
-  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
-  .gallery-item{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;background:var(--ice-mid);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:.8rem;font-weight:600;cursor:pointer;transition:transform .2s;position:relative}
-  .gallery-item:hover,.gallery-item:focus{transform:scale(1.02);outline:3px solid var(--focus)}
-  .gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
-  .gallery-item-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(27,63,110,.85));color:white;font-size:.8rem;font-weight:600;padding:16px 12px 10px;text-align:center}
+/* hero */
+.hero{position:relative;height:calc(100vh - var(--nav-h));min-height:540px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--navy) 0%,#0d2645 60%,#1a3a6e 100%);z-index:0}
+.hero-yt{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.hero-yt iframe{position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,63,110,.82) 0%,rgba(0,0,0,.5) 100%);z-index:2}
+.hero-content{position:relative;z-index:3;text-align:center;padding:0 20px;max-width:900px}
+.hero-badge{display:inline-block;background:rgba(192,57,43,.9);color:var(--white);font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px}
+.hero-title{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.85);margin-bottom:12px;font-style:italic}
+.hero-desc{font-size:clamp(.9rem,1.8vw,1.1rem);color:rgba(255,255,255,.75);margin-bottom:36px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.7}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;text-align:center;color:rgba(255,255,255,.6);font-size:.75rem;letter-spacing:1px;animation:bounce 2s infinite}
+.scroll-arrow{display:block;width:20px;height:20px;border-right:2px solid rgba(255,255,255,.5);border-bottom:2px solid rgba(255,255,255,.5);transform:rotate(45deg);margin:6px auto 0}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
-  /* ── SOCIAL ── */
-  .social-links{display:flex;gap:12px}
-  .social-links a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .2s;flex-shrink:0}
-  .social-links a:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5)}
-  .social-links svg{width:17px;height:17px;fill:rgba(255,255,255,.65)}
-  .social-links a:hover svg{fill:#fff}
-
-  /* ── PORTAL LOGIN ── */
-  .portal-login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);padding:40px 20px}
-  .portal-login-box{background:var(--white);border-radius:16px;padding:48px 40px;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-
-  /* ── FOOTER ── */
-  footer{background:var(--navy-dark);padding:60px 40px 30px}
-  .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-  .footer-logo{height:48px;width:auto;filter:brightness(0) invert(1);opacity:.85;margin-bottom:12px;display:block}
-  .footer-brand p{color:rgba(255,255,255,.5);font-size:.85rem;line-height:1.7;margin-top:4px}
-  .footer-col h3{color:var(--white);font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
-  .footer-col ul{list-style:none}
-  .footer-col li{margin-bottom:10px}
-  .footer-col a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.85rem;transition:color .2s}
-  .footer-col a:hover{color:var(--white)}
-  .footer-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-  .footer-bottom p{color:rgba(255,255,255,.4);font-size:.8rem}
-  .footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
-  .footer-bottom a:hover{color:rgba(255,255,255,.7)}
-
-  /* ── RESPONSIVE ── */
-  @media(max-width:900px){
-    section{padding:60px 20px}
-    .services-grid,.steps-grid,.testimonial-grid,.team-grid,.preowned-features{grid-template-columns:1fr}
-    .split,.contact-grid{grid-template-columns:1fr}
-    .split.reverse{direction:ltr}
-    .stats-inner{grid-template-columns:1fr 1fr}
-    .benefits-list{grid-template-columns:1fr}
-    .gallery{grid-template-columns:1fr 1fr}
-    .footer-grid{grid-template-columns:1fr 1fr}
-    .footer-bottom{flex-direction:column;text-align:center}
-    .form-row{grid-template-columns:1fr}
-    .video-grid{grid-template-columns:1fr}
-  }
-  @media(max-width:540px){
-    .hero-btns{flex-direction:column;align-items:center}
-    .gallery{grid-template-columns:1fr}
-    .footer-grid{grid-template-columns:1fr}
-  }
-  @media(prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  }
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* responsive */
+@media(max-width:900px){
+  section{padding:60px 20px}
+  .services-grid,.steps-grid,.testimonial-grid,.team-grid,.preowned-features{grid-template-columns:1fr}
+  .split,.contact-grid{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .benefits-list{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .form-row{grid-template-columns:1fr}
+  .video-grid{grid-template-columns:1fr}
+}
+@media(max-width:540px){
+  .hero-btns{flex-direction:column;align-items:center}
+  .gallery{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<!-- NAV -->
-<nav role="navigation" aria-label="Main navigation">
-  <a class="nav-logo" href="#" onclick="showPage('home')" aria-label="HINA Home Ice North America">
-    <img id="navLogo" alt="HINA – Home Ice North America logo">
+<!-- ══ NAV — lives completely outside all pages ══ -->
+<nav id="site-nav" aria-label="Main navigation">
+  <a class="nav-logo" href="#" onclick="go('home')" aria-label="HINA Home">
+    <img id="navLogo" src="https://i.imgur.com/A6TnMMG.png" alt="HINA logo">
   </a>
-  <ul class="nav-links" id="navLinks" role="list">
-    <li><a href="#" onclick="showPage('home')" data-page="home" aria-current="page">Home</a></li>
-    <li><a href="#" onclick="showPage('about')" data-page="about">About</a></li>
-    <li><a href="#" onclick="showPage('process')" data-page="process">Our Process</a></li>
-    <li><a href="#" onclick="showPage('projects')" data-page="projects">Projects</a></li>
-    <li><a href="#" onclick="showPage('contact')" data-page="contact" class="nav-cta">Contact Us</a></li>
+  <ul>
+    <li><a onclick="go('home')" data-page="home" class="active">Home</a></li>
+    <li><a onclick="go('about')" data-page="about">About</a></li>
+    <li><a onclick="go('process')" data-page="process">Our Process</a></li>
+    <li><a onclick="go('projects')" data-page="projects">Projects</a></li>
+    <li><a onclick="go('contact')" data-page="contact" class="nav-cta">Contact Us</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- MOBILE MENU (separate from nav, below it) -->
-<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
-  <a href="#" onclick="navTo('home')">Home</a>
-  <a href="#" onclick="navTo('about')">About</a>
-  <a href="#" onclick="navTo('process')">Our Process</a>
-  <a href="#" onclick="navTo('projects')">Projects</a>
-  <a href="#" onclick="navTo('contact')" class="mob-cta">Contact Us</a>
+<!-- Mobile drawer -->
+<div id="mobile-drawer">
+  <a onclick="go('home')">Home</a>
+  <a onclick="go('about')">About</a>
+  <a onclick="go('process')">Our Process</a>
+  <a onclick="go('projects')">Projects</a>
+  <a onclick="go('contact')" class="mob-cta">Contact Us</a>
 </div>
 
-<!-- ══ HOME ══ -->
-<div id="page-home" class="page active" role="region" aria-label="Home">
-  <main id="main-content">
-    <section aria-label="Hero — Custom ice rink installation">
+<!-- ══ ALL PAGES live inside this single wrapper ══ -->
+<div id="page-wrapper">
+
+  <!-- HOME -->
+  <div id="pg-home">
+    <main id="main-content">
+      <!-- Hero -->
       <div class="hero">
-        <div class="hero-placeholder" aria-hidden="true"><img class="hero-logo" alt="" id="heroLogoWatermark"></div>
-        <div class="hero-yt-wrap" aria-hidden="true">
-          <iframe
-            src="https://www.youtube.com/embed/GTi9ziLrBic?autoplay=1&mute=1&loop=1&playlist=GTi9ziLrBic&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
-            allow="autoplay; encrypted-media"
-            allowfullscreen
-            title="HINA background video"
-            tabindex="-1">
-          </iframe>
+        <div class="hero-bg"></div>
+        <div class="hero-yt" aria-hidden="true">
+          <iframe src="https://www.youtube.com/embed/GTi9ziLrBic?autoplay=1&mute=1&loop=1&playlist=GTi9ziLrBic&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
         </div>
-        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
           <span class="hero-badge">Bringing Hockey Home</span>
           <h1 class="hero-title">We Professionally Install Refrigerated Ice Rinks</h1>
           <p class="hero-sub">Let Us Help Create Memories That Will Last a Lifetime</p>
           <p class="hero-desc">Custom refrigerated rinks for residential and commercial use — supply and install nationwide, full service in the NY Tri-State area.</p>
           <div class="hero-btns">
-            <button class="btn btn-primary" onclick="showPage('contact')">Get a Free Estimate</button>
+            <button class="btn btn-primary" onclick="go('contact')">Get a Free Estimate</button>
             <button class="btn btn-outline" onclick="document.getElementById('homeVideos').scrollIntoView({behavior:'smooth'})">Watch Our Work</button>
           </div>
         </div>
         <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><span class="scroll-arrow"></span></div>
       </div>
-    </section>
 
-    <section aria-label="Company statistics" class="stats-bar">
-      <div class="section-inner" style="text-align:center;margin-bottom:32px">
-        <p class="section-label" style="justify-content:center;display:flex">Our Track Record</p>
-        <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:0">Trusted by Families & Businesses Across the Country</h2>
-      </div>
-      <div class="stats-inner" style="grid-template-columns:repeat(3,1fr)">
-        <div><div class="stat-num" aria-label="Over 10 years experience">10+</div><div class="stat-label">Years Experience</div></div>
-        <div><div class="stat-num" aria-label="Over 80 rinks installed">80+</div><div class="stat-label">Rinks Installed</div></div>
-        <div><div class="stat-num" aria-label="100 percent custom builds">100%</div><div class="stat-label">Custom Builds</div></div>
-      </div>
-    </section>
-
-    <section class="video-section" id="homeVideos" aria-label="Project videos">
-      <div class="section-inner">
-        <p class="section-label">See Our Work in Action</p>
-        <h2 class="section-title">Watch HINA Build Dream Rinks</h2>
-        <p class="section-sub">From backyard to commercial — our video portfolio shows the quality and craftsmanship behind every project.</p>
-        <div class="video-grid">
-          <article class="video-card">
-            <div class="video-thumb">
-              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/6ir6BIQlZ4o?rel=0&modestbranding=1" title="Home Ice North America: Let's bring hockey home" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:0;display:block"></iframe>
-            </div>
-            <div class="video-info"><h3>Home Ice North America: Let's Bring Hockey Home</h3><p>See what our home rinks are all about.</p></div>
-          </article>
-          <article class="video-card">
-            <div class="video-thumb">
-              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/V1hC3KfjI7Y?rel=0&modestbranding=1" title="Born to Skate, Built for Memories — Home Ice North America" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:0;display:block"></iframe>
-            </div>
-            <div class="video-info"><h3>Born to Skate, Built for Memories</h3><p>Watch our young skaters hit the ice, have a blast, and level up their game.</p></div>
-          </article>
-          <article class="video-card">
-            <div class="video-thumb">
-              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/y6qrP3A7yKY?rel=0&modestbranding=1" title="Game on! Adult League in Action — Home Ice North America" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:0;display:block"></iframe>
-            </div>
-            <div class="video-info"><h3>Game On! Adult League in Action</h3><p>Competitive, passionate, and built for the love of the game.</p></div>
-          </article>
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="section-inner" style="text-align:center;margin-bottom:32px">
+          <p class="section-label">Our Track Record</p>
+          <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:0">Trusted by Families & Businesses Across the Country</h2>
+        </div>
+        <div class="stats-inner">
+          <div><div class="stat-num">10+</div><div class="stat-label">Years Experience</div></div>
+          <div><div class="stat-num">80+</div><div class="stat-label">Rinks Installed</div></div>
+          <div><div class="stat-num">100%</div><div class="stat-label">Custom Builds</div></div>
         </div>
       </div>
-    </section>
 
-    <section aria-label="Our services">
-      <div class="section-inner">
-        <p class="section-label">What We Offer</p>
-        <h2 class="section-title">Complete Ice Rink Solutions</h2>
-        <div class="services-grid">
-          <div class="service-card" onclick="showPage('process')" tabindex="0" role="button" aria-label="Custom Installation — click to go to Our Process page" onkeydown="if(event.key==='Enter'||event.key===' ')showPage('process')">
-            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-            <h3>Custom Installation</h3><p>We consult, design, and install fully custom rinks for any property. Indoor or outdoor, permanent or portable.</p>
-          </div>
-          <div class="service-card" tabindex="0">
-            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <h3>At-Home Maintenance</h3><p>Seasonal setup, daily maintenance, mechanical service, and storage management — we keep your ice perfect.</p>
-          </div>
-          <div class="service-card" onclick="showPage('preowned')" tabindex="0" role="button" aria-label="Pre-Owned Systems — click to go to Pre-Owned page" onkeydown="if(event.key==='Enter'||event.key===' ')showPage('preowned')">
-            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            <h3>Pre-Owned Systems</h3><p>Recoup your investment by listing your rink through HINA. Buyers across the US and Canada every week.</p>
-          </div>
-          <div class="service-card" tabindex="0">
-            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
-            <h3>General Contracting</h3><p>We handle the entire GC process or integrate with your existing contractor — end-to-end project management.</p>
-          </div>
-          <div class="service-card" tabindex="0">
-            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-            <h3>Court/Rink Combos</h3><p>Convert your rink space to a year-round court for racket sports, soccer, or lacrosse during off-ice months.</p>
-          </div>
-          <div class="service-card" tabindex="0">
-            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-            <h3>Expert Consultation</h3><p>Not sure where to start? Our team guides you through every decision with no pressure, just answers.</p>
+      <!-- Videos -->
+      <div class="video-section" id="homeVideos">
+        <div class="section-inner">
+          <p class="section-label">See Our Work in Action</p>
+          <h2 class="section-title">Watch HINA Build Dream Rinks</h2>
+          <p class="section-sub">From backyard to commercial — our video portfolio shows the quality and craftsmanship behind every project.</p>
+          <div class="video-grid">
+            <div class="video-card"><div class="video-thumb"><iframe src="https://www.youtube.com/embed/6ir6BIQlZ4o?rel=0&modestbranding=1" title="Let's Bring Hockey Home" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="video-info"><h3>Home Ice North America: Let's Bring Hockey Home</h3><p>See what our home rinks are all about.</p></div></div>
+            <div class="video-card"><div class="video-thumb"><iframe src="https://www.youtube.com/embed/V1hC3KfjI7Y?rel=0&modestbranding=1" title="Born to Skate" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="video-info"><h3>Born to Skate, Built for Memories</h3><p>Watch our young skaters hit the ice and level up their game.</p></div></div>
+            <div class="video-card"><div class="video-thumb"><iframe src="https://www.youtube.com/embed/y6qrP3A7yKY?rel=0&modestbranding=1" title="Adult League" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="video-info"><h3>Game On! Adult League in Action</h3><p>Competitive, passionate, and built for the love of the game.</p></div></div>
           </div>
         </div>
       </div>
-    </section>
 
-    <section aria-label="Installation overview" style="background:var(--ice)">
-      <div class="section-inner"><div class="split">
-        <div class="split-text">
-          <p class="section-label">Why HINA</p>
-          <h2 class="section-title">Installation of Your Ice Rink Is a Breeze</h2>
-          <p class="section-sub" style="margin-bottom:24px">At HINA we build fully custom ice rinks — no two projects are the same. We offer complete General Contracting services to guide you from design to installation, or we can work alongside your existing contractor.</p>
-          <button class="btn btn-primary" onclick="showPage('process')">Learn Our Process</button>
+      <!-- Services -->
+      <section>
+        <div class="section-inner">
+          <p class="section-label">What We Offer</p>
+          <h2 class="section-title">Complete Ice Rink Solutions</h2>
+          <div class="services-grid">
+            <div class="service-card" onclick="go('process')"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Custom Installation</h3><p>We consult, design, and install fully custom rinks for any property. Indoor or outdoor, permanent or portable.</p></div>
+            <div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>At-Home Maintenance</h3><p>Seasonal setup, daily maintenance, mechanical service, and storage management — we keep your ice perfect.</p></div>
+            <div class="service-card" onclick="go('preowned')"><div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>Pre-Owned Systems</h3><p>Recoup your investment by listing your rink through HINA. Buyers across the US and Canada every week.</p></div>
+            <div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div><h3>General Contracting</h3><p>We handle the entire GC process or integrate with your existing contractor — end-to-end project management.</p></div>
+            <div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>Court/Rink Combos</h3><p>Convert your rink space to a year-round court for racket sports, soccer, or lacrosse during off-ice months.</p></div>
+            <div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3>Expert Consultation</h3><p>Not sure where to start? Our team guides you through every decision with no pressure, just answers.</p></div>
+          </div>
         </div>
-        <div class="split-img" style="padding:0;background:#000"><img src="https://i.imgur.com/e6kR4pD.jpeg" alt="HINA installed rink with spectators and community game day" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentElement.innerHTML='<span style=\'padding:20px;color:var(--navy)\'>Rink game day photo</span>'"></div>
-      </div></div>
-    </section>
+      </section>
 
-    <section aria-label="Benefits of private rink ownership" class="benefits-bg">
-      <div class="section-inner">
-        <p class="section-label">Private Rink Ownership</p>
-        <h2 class="section-title">Benefits of Having Your Own Rink</h2>
-        <div class="benefits-list">
-          <div class="benefit-item"><div class="benefit-icon" aria-hidden="true"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Get Off the Screens and On the Ice</h3><p>Build healthier family habits and active outdoor time year-round.</p></div></div>
-          <div class="benefit-item"><div class="benefit-icon" aria-hidden="true"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Private Training</h3><p>Skate on your schedule. Train with a coach, work on skills privately.</p></div></div>
-          <div class="benefit-item"><div class="benefit-icon" aria-hidden="true"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Increased Ice Time</h3><p>No more scheduling conflicts, drives to the rink, or crowded sessions.</p></div></div>
-          <div class="benefit-item"><div class="benefit-icon" aria-hidden="true"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Build Community</h3><p>Your rink becomes the neighborhood hub — a social gathering space all winter.</p></div></div>
-          <div class="benefit-item"><div class="benefit-icon" aria-hidden="true"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Lifelong Memories</h3><p>Every family that owns a rink tells us it's one of their best investments.</p></div></div>
-          <div class="benefit-item"><div class="benefit-icon" aria-hidden="true"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Year-Round Versatility</h3><p>Convert to a court for tennis, lacrosse, or soccer in the off-ice months.</p></div></div>
+      <!-- Split -->
+      <section style="background:var(--ice)">
+        <div class="section-inner"><div class="split">
+          <div>
+            <p class="section-label">Why HINA</p>
+            <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.2rem)">Installation of Your Ice Rink Is a Breeze</h2>
+            <p class="section-sub" style="margin-bottom:24px">At HINA we build fully custom ice rinks — no two projects are the same. We offer complete General Contracting services to guide you from design to installation, or we can work alongside your existing contractor.</p>
+            <button class="btn btn-primary" onclick="go('process')">Learn Our Process</button>
+          </div>
+          <div class="split-img"><img src="https://i.imgur.com/e6kR4pD.jpeg" alt="HINA rink game day"></div>
+        </div></div>
+      </section>
+
+      <!-- Benefits -->
+      <section style="background:var(--white)">
+        <div class="section-inner">
+          <p class="section-label">Private Rink Ownership</p>
+          <h2 class="section-title">Benefits of Having Your Own Rink</h2>
+          <div class="benefits-list">
+            <div class="benefit-item"><div class="benefit-icon"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Get Off the Screens and On the Ice</h3><p style="font-size:.82rem;color:var(--gray);line-height:1.5">Build healthier family habits and active outdoor time year-round.</p></div></div>
+            <div class="benefit-item"><div class="benefit-icon"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Private Training</h3><p style="font-size:.82rem;color:var(--gray);line-height:1.5">Skate on your schedule. Train with a coach, work on skills privately.</p></div></div>
+            <div class="benefit-item"><div class="benefit-icon"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Increased Ice Time</h3><p style="font-size:.82rem;color:var(--gray);line-height:1.5">No more scheduling conflicts, drives to the rink, or crowded sessions.</p></div></div>
+            <div class="benefit-item"><div class="benefit-icon"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Build Community</h3><p style="font-size:.82rem;color:var(--gray);line-height:1.5">Your rink becomes the neighborhood hub — a social gathering space all winter.</p></div></div>
+            <div class="benefit-item"><div class="benefit-icon"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Lifelong Memories</h3><p style="font-size:.82rem;color:var(--gray);line-height:1.5">Every family that owns a rink tells us it's one of their best investments.</p></div></div>
+            <div class="benefit-item"><div class="benefit-icon"></div><div><h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px">Year-Round Versatility</h3><p style="font-size:.82rem;color:var(--gray);line-height:1.5">Convert to a court for tennis, lacrosse, or soccer in the off-ice months.</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <div class="testimonials-section">
+        <div class="section-inner">
+          <p class="section-label">What Clients Say</p>
+          <h2 class="section-title">Real Families. Real Rinks.</h2>
+          <div class="testimonial-grid">
+            <div class="testimonial"><div class="puck"></div><blockquote>"Working with HINA was an excellent experience. My entire family uses the rink and my kids couldn't be happier."</blockquote><cite>— Anthony, Scarsdale NY</cite></div>
+            <div class="testimonial"><div class="puck"></div><blockquote>"From first call to first skate, the team was professional, communicative, and delivered exactly what they promised."</blockquote><cite>— Client, Fairfield County CT</cite></div>
+            <div class="testimonial"><div class="puck"></div><blockquote>"The rink has become the centerpiece of our backyard. Worth every penny — we skate three times a week."</blockquote><cite>— Client, Bergen County NJ</cite></div>
+          </div>
         </div>
       </div>
-    </section>
 
-    <section class="testimonials-section" aria-label="Client testimonials">
-      <div class="section-inner">
-        <p class="section-label">What Clients Say</p>
-        <h2 class="section-title">Real Families. Real Rinks.</h2>
-        <div class="testimonial-grid">
-          <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"Working with HINA was an excellent experience. My entire family uses the rink and my kids couldn't be happier."</blockquote><cite>— Anthony, Scarsdale NY</cite></article>
-          <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"From first call to first skate, the team was professional, communicative, and delivered exactly what they promised."</blockquote><cite>— Client, Fairfield County CT</cite></article>
-          <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"The rink has become the centerpiece of our backyard. Worth every penny — we skate three times a week."</blockquote><cite>— Client, Bergen County NJ</cite></article>
-        </div>
-        <div style="text-align:center;margin-top:36px">
-          <button class="btn btn-outline" onclick="showPage('testimonials')" style="border-color:rgba(255,255,255,.4)">Read All Testimonials</button>
-        </div>
+      <!-- CTA -->
+      <div class="cta-banner">
+        <h2>Bringing Hockey Home</h2>
+        <p>Ready to start your custom ice rink project?</p>
+        <button class="btn btn-white" onclick="go('contact')">Get Started Today</button>
       </div>
-    </section>
+    </main>
+  </div><!-- /pg-home -->
 
-    <div class="cta-banner" role="complementary" aria-label="Call to action">
-      <h2>Bringing Hockey Home</h2>
-      <p>Ready to start your custom ice rink project?</p>
-      <button class="btn btn-white" onclick="showPage('contact')">Get Started Today</button>
-    </div>
-  </main>
-</div>
-
-<!-- ══ ABOUT ══ -->
-<div id="page-about" class="page" role="region" aria-label="About HINA">
-  <main id="main-content-about">
+  <!-- ABOUT -->
+  <div id="pg-about" style="display:none">
     <section style="background:var(--navy);padding:80px 40px 60px">
       <div class="section-inner">
         <p class="section-label" style="color:#7db3e8">Who We Are</p>
@@ -495,393 +424,369 @@
         <p class="section-sub" style="color:rgba(255,255,255,.8)">Home Ice North America has provided residential and commercial rink installations for over ten years.</p>
       </div>
     </section>
-    <section aria-label="Our story"><div class="section-inner"><div class="split">
-      <div class="split-text"><p class="section-label">Our Story</p><h2 class="section-title">Built by Hockey People, for Hockey Families</h2><p class="section-sub">We provide customers with brand-new and pre-owned options, customized to fit any space. From the initial phone call through installation and ongoing maintenance, we're with you every step.</p></div>
-      <div class="split-img" style="padding:0"><img src="https://i.imgur.com/riQCRuO.jpeg" alt="Aerial view of large HINA custom ice rink beside luxury home" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-    </div></div></section>
-    <section style="background:var(--ice)" aria-label="Meet the team"><div class="section-inner">
-      <p class="section-label">The People Behind HINA</p>
-      <h2 class="section-title">Meet the HINA Team</h2>
-      <p class="section-sub">Our team brings over ten years of experience designing and installing ice rinks for residential and commercial settings.</p>
-      <div class="team-grid">
-        <article class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><circle cx="40" cy="30" r="18" fill="#c8d8ec"/><path d="M10 70c0-16.6 13.4-30 30-30s30 13.4 30 30" fill="#c8d8ec"/></svg></div><div class="team-info"><h3>David MacBride</h3><p>Partner & Project Manager</p></div></article>
-        <article class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><circle cx="40" cy="30" r="18" fill="#c8d8ec"/><path d="M10 70c0-16.6 13.4-30 30-30s30 13.4 30 30" fill="#c8d8ec"/></svg></div><div class="team-info"><h3>Tyler Rogers</h3><p>Partner & Sales</p></div></article>
-        <article class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><circle cx="40" cy="30" r="18" fill="#c8d8ec"/><path d="M10 70c0-16.6 13.4-30 30-30s30 13.4 30 30" fill="#c8d8ec"/></svg></div><div class="team-info"><h3>Brian Landy</h3><p>Partner & Financials</p></div></article>
-      </div>
-    </div></section>
-    <section aria-label="Service areas"><div class="section-inner"><div class="split">
-      <div class="split-text"><p class="section-label">Where We Work</p><h2 class="section-title">Nationwide Installation, Tri-State Full Service</h2><p class="section-sub" style="margin-bottom:28px">Full installation and consultation nationwide. Full service within the NY Tri-State area:</p>
-        <div class="areas-grid" role="list">
-          <div class="area-tag" role="listitem"><span class="area-dot" aria-hidden="true"></span>Westchester County, NY</div>
-          <div class="area-tag" role="listitem"><span class="area-dot" aria-hidden="true"></span>Fairfield County, CT</div>
-          <div class="area-tag" role="listitem"><span class="area-dot" aria-hidden="true"></span>Bergen County, NJ</div>
-          <div class="area-tag" role="listitem"><span class="area-dot" aria-hidden="true"></span>Morris County, NJ</div>
-          <div class="area-tag" role="listitem"><span class="area-dot" aria-hidden="true"></span>Putnam County, NY</div>
-          <div class="area-tag" role="listitem"><span class="area-dot" aria-hidden="true"></span>Nationwide Supply &amp; Install</div>
-        </div>
-      </div>
-      <div class="split-img" style="padding:0"><img src="https://i.imgur.com/ItyIUXC.jpeg" alt="Kids skating together on a HINA backyard ice rink at night" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-    </div></div></section>
-    <section class="testimonials-section" aria-label="Client testimonials">
+    <section>
+      <div class="section-inner"><div class="split">
+        <div><p class="section-label">Our Story</p><h2 class="section-title">Built by Hockey People, for Hockey Families</h2><p class="section-sub">We provide customers with brand-new and pre-owned options, customized to fit any space. From the initial phone call through installation and ongoing maintenance, we're with you every step.</p></div>
+        <div class="split-img"><img src="https://i.imgur.com/riQCRuO.jpeg" alt="Aerial view of HINA rink"></div>
+      </div></div>
+    </section>
+    <section style="background:var(--ice)">
       <div class="section-inner">
-        <p class="section-label" style="color:#7db3e8">Client Stories</p>
-        <h2 class="section-title" style="color:var(--white)">What Our Clients Say</h2>
-        <div class="testimonial-grid">
-          <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"Working with HINA was an excellent experience. My entire family uses the rink and my kids couldn't be happier."</blockquote><cite>— Anthony, Scarsdale NY</cite></article>
-          <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"The team handled everything from the first phone call through installation. Professional from start to finish."</blockquote><cite>— Client, Fairfield County CT</cite></article>
-          <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"Our rink is the centerpiece of the neighborhood now. Every winter the whole street skates with us."</blockquote><cite>— Client, Bergen County NJ</cite></article>
-          <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"The quality of the build exceeded our expectations. The refrigeration system works perfectly even in mild weather."</blockquote><cite>— Client, Westchester NY</cite></article>
-          <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"HINA worked alongside our GC seamlessly. The project came in on time and on budget."</blockquote><cite>— Commercial Client, CT</cite></article>
-          <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"We bought a pre-owned system through HINA and the whole process was smooth. Saved a significant amount versus new."</blockquote><cite>— Client, NJ</cite></article>
+        <p class="section-label">The People Behind HINA</p>
+        <h2 class="section-title">Meet the HINA Team</h2>
+        <p class="section-sub">Our team brings over ten years of experience designing and installing ice rinks for residential and commercial settings.</p>
+        <div class="team-grid">
+          <div class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="18" fill="#c8d8ec"/><path d="M10 70c0-16.6 13.4-30 30-30s30 13.4 30 30" fill="#c8d8ec"/></svg></div><div class="team-info"><h3>David MacBride</h3><p>Partner & Project Manager</p></div></div>
+          <div class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="18" fill="#c8d8ec"/><path d="M10 70c0-16.6 13.4-30 30-30s30 13.4 30 30" fill="#c8d8ec"/></svg></div><div class="team-info"><h3>Tyler Rogers</h3><p>Partner & Sales</p></div></div>
+          <div class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="18" fill="#c8d8ec"/><path d="M10 70c0-16.6 13.4-30 30-30s30 13.4 30 30" fill="#c8d8ec"/></svg></div><div class="team-info"><h3>Brian Landy</h3><p>Partner & Financials</p></div></div>
         </div>
       </div>
     </section>
-    <div class="cta-banner"><h2>Bringing Hockey Home</h2><p>Let's talk about your project.</p><button class="btn btn-white" onclick="showPage('contact')">Contact Us</button></div>
-  </main>
-</div>
-
-<!-- ══ PROCESS ══ -->
-<div id="page-process" class="page" role="region" aria-label="Our process">
-  <main id="main-content-process">
-    <section style="background:var(--navy);padding:80px 40px 60px"><div class="section-inner"><p class="section-label" style="color:#7db3e8">How It Works</p><h1 class="section-title" style="color:var(--white);font-size:clamp(2rem,5vw,3.2rem)">Installing Your Unique Ice Rink</h1></div></section>
-    <section class="process-section" aria-label="Six step installation process"><div class="section-inner"><div class="steps-grid">
-      <div class="step"><div class="step-num" aria-hidden="true">1</div><h2 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px">Initial Phone Call</h2><p>Pick up the phone and give us a call — even if you're just thinking about a project.</p></div>
-      <div class="step"><div class="step-num" aria-hidden="true">2</div><h2 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px">Building Your Estimate</h2><p>Once we have a general idea of your project, we'll provide a rough, itemized estimate.</p></div>
-      <div class="step"><div class="step-num" aria-hidden="true">3</div><h2 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px">First Site Visit</h2><p>We'll schedule a site visit to take measurements and discuss unique features you'd like.</p></div>
-      <div class="step"><div class="step-num" aria-hidden="true">4</div><h2 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px">Crafting the Proposal</h2><p>HINA will provide a detailed proposal encompassing all aspects of the project.</p></div>
-      <div class="step"><div class="step-num" aria-hidden="true">5</div><h2 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px">Gather Equipment</h2><p>Upon receipt of a signed proposal and deposit, we order your custom ice rink. 12–15 weeks lead time.</p></div>
-      <div class="step"><div class="step-num" aria-hidden="true">6</div><h2 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px">Site Prep &amp; Installation</h2><p>We work to have you up and skating as soon as the weather turns cold.</p></div>
-    </div></div></section>
-    <div class="cta-banner"><h2>Ready to Get Started?</h2><p>Call us now to have your ice rink project started today.</p><button class="btn btn-white" onclick="showPage('contact')">Call Now</button></div>
-  </main>
-</div>
-
-<!-- ══ PRE-OWNED ══ -->
-<div id="page-preowned" class="page" role="region" aria-label="Pre-owned ice rink systems">
-  <main id="main-content-preowned">
-    <section style="background:var(--navy);padding:80px 40px 60px"><div class="section-inner"><p class="section-label" style="color:#7db3e8">Buy or Sell</p><h1 class="section-title" style="color:var(--white);font-size:clamp(2rem,5vw,3.2rem)">Pre-Owned Ice Rink Systems</h1></div></section>
-    <section aria-label="Selling your rink"><div class="section-inner"><div class="split">
-      <div class="split-text"><p class="section-label">Sell Your Rink</p><h2 class="section-title">Process of Selling Your Pre-Owned Ice Rink</h2><p class="section-sub">Many of our residential clients "outgrow" their home rinks and seek to recoup their investment. Our team will help list your rink with transparent terms. We get inquiries from across the US and Canada weekly.</p><button class="btn btn-primary" style="margin-top:24px" onclick="showPage('contact')">List My Rink</button></div>
-      <div class="split-img" style="padding:0"><img src="https://i.imgur.com/LT2kzEL.jpeg" alt="Newly installed HINA ice rink with glass boards" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-    </div></div></section>
-    <section style="background:var(--ice)" aria-label="Pre-owned system benefits"><div class="section-inner">
-      <p class="section-label">Why Buy Pre-Owned</p><h2 class="section-title">Everything Managed For You</h2>
-      <div class="preowned-features">
-        <div class="po-feat"><h3 style="font-weight:700;color:var(--navy);margin-bottom:8px;font-size:.95rem">Vetted Inventory</h3><p>Every pre-owned system is inspected before listing.</p></div>
-        <div class="po-feat"><h3 style="font-weight:700;color:var(--navy);margin-bottom:8px;font-size:.95rem">Nationwide Buyers</h3><p>Our database spans the US and Canada — hundreds of qualified buyers.</p></div>
-        <div class="po-feat"><h3 style="font-weight:700;color:var(--navy);margin-bottom:8px;font-size:.95rem">Installation Included</h3><p>We coordinate full installation at the new location — turn-key service.</p></div>
-      </div>
-    </div></section>
-    <div class="cta-banner"><h2>Recoup Your Investment</h2><p>HINA will facilitate the listing and sale of your rink.</p><button class="btn btn-white" onclick="showPage('contact')">Get In Touch</button></div>
-  </main>
-</div>
-
-<!-- ══ PROJECTS ══ -->
-<div id="page-projects" class="page" role="region" aria-label="Our projects">
-  <main id="main-content-projects">
-    <section style="background:var(--navy);padding:80px 40px 60px"><div class="section-inner"><p class="section-label" style="color:#7db3e8">Our Work</p><h1 class="section-title" style="color:var(--white);font-size:clamp(2rem,5vw,3.2rem)">Featured Projects</h1></div></section>
-    <section class="video-section" aria-label="Project videos"><div class="section-inner">
-      <p class="section-label">Video Showcase</p><h2 class="section-title">Projects in Motion</h2>
-      <div class="video-grid">
-        <article class="video-card"><div class="video-thumb" style="aspect-ratio:16/9"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/GTi9ziLrBic?rel=0&modestbranding=1" title="Bring Hockey Home: Rink Installation by Home Ice North America" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:0;display:block"></iframe></div><div class="video-info"><h3>Bring Hockey Home: Rink Installation</h3><p>A cinematic look at custom ice rink builds by Home Ice North America.</p></div></article>
-        <article class="video-card"><div class="video-thumb" style="aspect-ratio:16/9"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/6ir6BIQlZ4o?rel=0&modestbranding=1" title="Home Ice North America: Let's Bring Hockey Home" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:0;display:block"></iframe></div><div class="video-info"><h3>Home Ice North America: Let's Bring Hockey Home</h3><p>See what our home rinks are all about.</p></div></article>
-        <article class="video-card"><div class="video-thumb" style="aspect-ratio:16/9"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/V1hC3KfjI7Y?rel=0&modestbranding=1" title="Born to Skate, Built for Memories — Home Ice North America" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:0;display:block"></iframe></div><div class="video-info"><h3>Born to Skate, Built for Memories</h3><p>Watch our young skaters hit the ice, have a blast, and level up their game.</p></div></article>
-        <article class="video-card"><div class="video-thumb" style="aspect-ratio:16/9"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/y6qrP3A7yKY?rel=0&modestbranding=1" title="Game on! Adult League in Action — Home Ice North America" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:0;display:block"></iframe></div><div class="video-info"><h3>Game On! Adult League in Action</h3><p>Competitive, passionate, and built for the love of the game.</p></div></article>
-      </div>
-    </div></section>
-    <section aria-label="Photo gallery"><div class="section-inner">
-      <p class="section-label">Photo Gallery</p><h2 class="section-title">From Our Portfolio</h2>
-      <div class="gallery" role="list">
-        <div class="gallery-item" role="listitem" tabindex="0" aria-label="Game action — goalie save at residential rink"><img src="https://i.imgur.com/xiTFe06.jpeg" alt="Hockey game action shot with goalie making a save at HINA installed rink"><span class="gallery-item-label">Game Day — Residential Rink</span></div>
-        <div class="gallery-item" role="listitem" tabindex="0" aria-label="Players enjoying the bench between shifts"><img src="https://i.imgur.com/UIZcBTp.jpeg" alt="Hockey players laughing and bonding at the bench of a HINA rink"><span class="gallery-item-label">Community & Camaraderie</span></div>
-        <div class="gallery-item" role="listitem" tabindex="0" aria-label="Overhead view of full game in progress"><img src="https://i.imgur.com/pjmK8ER.jpeg" alt="Overhead aerial view of hockey game in progress on HINA installed rink"><span class="gallery-item-label">Full Game — Overhead View</span></div>
-        <div class="gallery-item" role="listitem" tabindex="0" aria-label="Player driving the puck on fresh ice"><img src="https://i.imgur.com/EderU91.jpeg" alt="Hockey player driving the puck on a HINA custom ice rink"><span class="gallery-item-label">On the Ice</span></div>
-        <div class="gallery-item" role="listitem" tabindex="0" aria-label="Summer rink installation with glass boards"><img src="https://i.imgur.com/LT2kzEL.jpeg" alt="Newly installed HINA ice rink with glass boards and yellow trim in summer"><span class="gallery-item-label">Fresh Install — Glass Boards</span></div>
-        <div class="gallery-item" role="listitem" tabindex="0" aria-label="Aerial view of large custom rink beside beautiful home"><img src="https://i.imgur.com/riQCRuO.jpeg" alt="Aerial view of large HINA custom ice rink beside luxury residential home"><span class="gallery-item-label">Luxury Residential — Aerial</span></div>
-      </div>
-    </div></section>
-    <div class="cta-banner"><h2>Start Your Project</h2><p>Ready to see your own rink in our portfolio?</p><button class="btn btn-white" onclick="showPage('contact')">Get a Free Estimate</button></div>
-  </main>
-</div>
-
-<!-- ══ TESTIMONIALS ══ -->
-<div id="page-testimonials" class="page" role="region" aria-label="Client testimonials">
-  <main id="main-content-testimonials">
-    <section class="testimonials-section" style="padding-top:80px" aria-label="All testimonials"><div class="section-inner">
-      <p class="section-label" style="color:#7db3e8">Client Stories</p>
-      <h1 class="section-title" style="color:var(--white);font-size:clamp(2rem,5vw,3.2rem)">What Our Clients Say</h1>
-      <div class="testimonial-grid" style="margin-top:48px">
-        <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"Working with HINA was an excellent experience. My entire family uses the rink and my kids couldn't be happier."</blockquote><cite>— Anthony, Scarsdale NY</cite></article>
-        <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"The team handled everything from the first phone call through installation. Professional from start to finish."</blockquote><cite>— Client, Fairfield County CT</cite></article>
-        <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"Our rink is the centerpiece of the neighborhood now. Every winter the whole street skates with us."</blockquote><cite>— Client, Bergen County NJ</cite></article>
-        <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"The quality of the build exceeded our expectations. The refrigeration system works perfectly even in mild weather."</blockquote><cite>— Client, Westchester NY</cite></article>
-        <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"HINA worked alongside our GC seamlessly. The project came in on time and on budget."</blockquote><cite>— Commercial Client, CT</cite></article>
-        <article class="testimonial"><div class="puck" aria-hidden="true"></div><blockquote>"We bought a pre-owned system through HINA and the whole process was smooth. Saved a significant amount versus new."</blockquote><cite>— Client, NJ</cite></article>
-      </div>
-    </div></section>
-    <div class="cta-banner"><h2>Ready to Create Your Own Memories?</h2><p>Join hundreds of families who brought hockey home.</p><button class="btn btn-white" onclick="showPage('contact')">Get Started</button></div>
-  </main>
-</div>
-
-<!-- ══ CONTACT ══ -->
-<div id="page-contact" class="page" role="region" aria-label="Contact us">
-  <main id="main-content-contact">
-    <section style="background:var(--navy);padding:80px 40px 60px"><div class="section-inner"><p class="section-label" style="color:#7db3e8">Get in Touch</p><h1 class="section-title" style="color:var(--white);font-size:clamp(2rem,5vw,3.2rem)">Contact Home Ice North America</h1></div></section>
-    <section aria-label="Contact form and information"><div class="section-inner"><div class="contact-grid">
-      <div class="contact-form">
-        <h2 style="color:var(--navy);font-size:1.2rem;margin-bottom:24px;font-weight:700">Send Us a Message</h2>
-        <div class="form-row">
-          <div class="form-group"><label for="firstName">First Name <span aria-hidden="true">*</span></label><input type="text" id="firstName" name="firstName" autocomplete="given-name" required placeholder="First Name"></div>
-          <div class="form-group"><label for="lastName">Last Name <span aria-hidden="true">*</span></label><input type="text" id="lastName" name="lastName" autocomplete="family-name" required placeholder="Last Name"></div>
+    <section>
+      <div class="section-inner"><div class="split">
+        <div>
+          <p class="section-label">Where We Work</p>
+          <h2 class="section-title">Nationwide Installation, Tri-State Full Service</h2>
+          <p class="section-sub" style="margin-bottom:28px">Full installation and consultation nationwide. Full service within the NY Tri-State area:</p>
+          <div class="areas-grid">
+            <div class="area-tag"><span class="area-dot"></span>Westchester County, NY</div>
+            <div class="area-tag"><span class="area-dot"></span>Fairfield County, CT</div>
+            <div class="area-tag"><span class="area-dot"></span>Bergen County, NJ</div>
+            <div class="area-tag"><span class="area-dot"></span>Morris County, NJ</div>
+            <div class="area-tag"><span class="area-dot"></span>Putnam County, NY</div>
+            <div class="area-tag"><span class="area-dot"></span>Nationwide Supply &amp; Install</div>
+          </div>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label for="phone">Phone <span aria-hidden="true">*</span></label><input type="tel" id="phone" name="phone" autocomplete="tel" required placeholder="(555) 000-0000"></div>
-          <div class="form-group"><label for="email">Email <span aria-hidden="true">*</span></label><input type="email" id="email" name="email" autocomplete="email" required placeholder="you@email.com"></div>
+        <div class="split-img"><img src="https://i.imgur.com/ItyIUXC.jpeg" alt="Kids skating at HINA rink at night"></div>
+      </div></div>
+    </section>
+    <div class="testimonials-section">
+      <div class="section-inner">
+        <p class="section-label" style="color:#7db3e8">Client Stories</p>
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial"><div class="puck"></div><blockquote>"Working with HINA was an excellent experience. My entire family uses the rink and my kids couldn't be happier."</blockquote><cite>— Anthony, Scarsdale NY</cite></div>
+          <div class="testimonial"><div class="puck"></div><blockquote>"The team handled everything from the first phone call through installation. Professional from start to finish."</blockquote><cite>— Client, Fairfield County CT</cite></div>
+          <div class="testimonial"><div class="puck"></div><blockquote>"Our rink is the centerpiece of the neighborhood now. Every winter the whole street skates with us."</blockquote><cite>— Client, Bergen County NJ</cite></div>
+          <div class="testimonial"><div class="puck"></div><blockquote>"The quality of the build exceeded our expectations. The refrigeration system works perfectly even in mild weather."</blockquote><cite>— Client, Westchester NY</cite></div>
+          <div class="testimonial"><div class="puck"></div><blockquote>"HINA worked alongside our GC seamlessly. The project came in on time and on budget."</blockquote><cite>— Commercial Client, CT</cite></div>
+          <div class="testimonial"><div class="puck"></div><blockquote>"We bought a pre-owned system through HINA and the whole process was smooth. Saved a significant amount versus new."</blockquote><cite>— Client, NJ</cite></div>
         </div>
-        <div class="form-group"><label for="projectType">Project Type</label><select id="projectType" name="projectType"><option>New Installation</option><option>Pre-Owned System</option><option>Maintenance</option><option>Court Combo</option><option>General Inquiry</option></select></div>
-        <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us about your project, your space, and what you're hoping to build..."></textarea></div>
-        <button type="submit" class="btn btn-primary" style="width:100%;font-size:1rem;padding:16px">Send Message</button>
       </div>
-      <div>
-        <h2 style="color:var(--navy);font-size:1.2rem;margin-bottom:20px;font-weight:700">We're Here to Help</h2>
-        <div class="contact-detail"><div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.89 9.11 19.79 19.79 0 01.82.5 2 2 0 012.81 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l.91-.91a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><strong>Phone</strong><span><a href="tel:+19174552007" style="color:var(--gray);text-decoration:none">917-455-2007</a></span></div></div>
-        <div class="contact-detail"><div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><strong>Email</strong><span><a href="mailto:info@homeicenorthamerica.com" style="color:var(--gray);text-decoration:none">info@homeicenorthamerica.com</a></span></div></div>
-        <div class="contact-detail"><div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><strong>Service Area</strong><span>NY Tri-State — Full Service<br>Nationwide — Supply &amp; Install</span></div></div>
-        <div style="margin-top:32px;background:var(--ice);border-radius:var(--radius);padding:24px">
-          <h3 style="color:var(--navy);font-size:.95rem;margin-bottom:12px">Follow Us</h3>
-          <div class="social-links" style="margin-top:0">
-            <a href="https://www.facebook.com/homeicenorthamerica" target="_blank" rel="noopener noreferrer" aria-label="HINA on Facebook" style="border-color:#1B3F6E33"><svg viewBox="0 0 24 24" style="fill:#1B3F6E"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-            <a href="https://www.instagram.com/homeicenorthamerica/" target="_blank" rel="noopener noreferrer" aria-label="HINA on Instagram" style="border-color:#1B3F6E33"><svg viewBox="0 0 24 24" style="fill:#1B3F6E"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4" style="fill:none;stroke:#1B3F6E;stroke-width:2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a>
-            <a href="https://www.linkedin.com/company/home-ice-north-america/" target="_blank" rel="noopener noreferrer" aria-label="HINA on LinkedIn" style="border-color:#1B3F6E33"><svg viewBox="0 0 24 24" style="fill:#1B3F6E"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+    <div class="cta-banner"><h2>Bringing Hockey Home</h2><p>Let's talk about your project.</p><button class="btn btn-white" onclick="go('contact')">Contact Us</button></div>
+  </div><!-- /pg-about -->
+
+  <!-- PROCESS -->
+  <div id="pg-process" style="display:none">
+    <section style="background:var(--navy);padding:80px 40px 60px">
+      <div class="section-inner"><p class="section-label" style="color:#7db3e8">How It Works</p><h1 class="section-title" style="color:var(--white);font-size:clamp(2rem,5vw,3.2rem)">Installing Your Unique Ice Rink</h1></div>
+    </section>
+    <section style="background:var(--ice)">
+      <div class="section-inner">
+        <div class="steps-grid">
+          <div class="step"><div class="step-num">1</div><h3>Initial Phone Call</h3><p>Pick up the phone and give us a call — even if you're just thinking about a project.</p></div>
+          <div class="step"><div class="step-num">2</div><h3>Building Your Estimate</h3><p>Once we have a general idea of your project, we'll provide a rough, itemized estimate.</p></div>
+          <div class="step"><div class="step-num">3</div><h3>First Site Visit</h3><p>We'll schedule a site visit to take measurements and discuss unique features you'd like.</p></div>
+          <div class="step"><div class="step-num">4</div><h3>Crafting the Proposal</h3><p>HINA will provide a detailed proposal encompassing all aspects of the project.</p></div>
+          <div class="step"><div class="step-num">5</div><h3>Gather Equipment</h3><p>Upon receipt of a signed proposal and deposit, we order your custom ice rink. 12–15 weeks lead time.</p></div>
+          <div class="step"><div class="step-num">6</div><h3>Site Prep &amp; Installation</h3><p>We work to have you up and skating as soon as the weather turns cold.</p></div>
+        </div>
+      </div>
+    </section>
+    <div class="cta-banner"><h2>Ready to Get Started?</h2><p>Call us now to have your ice rink project started today.</p><button class="btn btn-white" onclick="go('contact')">Call Now</button></div>
+  </div><!-- /pg-process -->
+
+  <!-- PROJECTS -->
+  <div id="pg-projects" style="display:none">
+    <section style="background:var(--navy);padding:80px 40px 60px">
+      <div class="section-inner"><p class="section-label" style="color:#7db3e8">Our Work</p><h1 class="section-title" style="color:var(--white);font-size:clamp(2rem,5vw,3.2rem)">Featured Projects</h1></div>
+    </section>
+    <div class="video-section">
+      <div class="section-inner">
+        <p class="section-label">Video Showcase</p><h2 class="section-title">Projects in Motion</h2>
+        <div class="video-grid">
+          <div class="video-card"><div class="video-thumb"><iframe src="https://www.youtube.com/embed/GTi9ziLrBic?rel=0&modestbranding=1" title="Rink Installation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="video-info"><h3>Bring Hockey Home: Rink Installation</h3><p>A cinematic look at custom ice rink builds by Home Ice North America.</p></div></div>
+          <div class="video-card"><div class="video-thumb"><iframe src="https://www.youtube.com/embed/6ir6BIQlZ4o?rel=0&modestbranding=1" title="Let's Bring Hockey Home" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="video-info"><h3>Home Ice North America: Let's Bring Hockey Home</h3><p>See what our home rinks are all about.</p></div></div>
+          <div class="video-card"><div class="video-thumb"><iframe src="https://www.youtube.com/embed/V1hC3KfjI7Y?rel=0&modestbranding=1" title="Born to Skate" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="video-info"><h3>Born to Skate, Built for Memories</h3><p>Watch our young skaters hit the ice and level up their game.</p></div></div>
+          <div class="video-card"><div class="video-thumb"><iframe src="https://www.youtube.com/embed/y6qrP3A7yKY?rel=0&modestbranding=1" title="Adult League" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="video-info"><h3>Game On! Adult League in Action</h3><p>Competitive, passionate, and built for the love of the game.</p></div></div>
+        </div>
+      </div>
+    </div>
+    <section>
+      <div class="section-inner">
+        <p class="section-label">Photo Gallery</p><h2 class="section-title">From Our Portfolio</h2>
+        <div class="gallery">
+          <div class="gallery-item"><img src="https://i.imgur.com/xiTFe06.jpeg" alt="Game day at HINA rink"><span class="gallery-item-label">Game Day — Residential Rink</span></div>
+          <div class="gallery-item"><img src="https://i.imgur.com/UIZcBTp.jpeg" alt="Players at the bench"><span class="gallery-item-label">Community & Camaraderie</span></div>
+          <div class="gallery-item"><img src="https://i.imgur.com/pjmK8ER.jpeg" alt="Overhead game view"><span class="gallery-item-label">Full Game — Overhead View</span></div>
+          <div class="gallery-item"><img src="https://i.imgur.com/EderU91.jpeg" alt="Player on ice"><span class="gallery-item-label">On the Ice</span></div>
+          <div class="gallery-item"><img src="https://i.imgur.com/LT2kzEL.jpeg" alt="Fresh install with glass boards"><span class="gallery-item-label">Fresh Install — Glass Boards</span></div>
+          <div class="gallery-item"><img src="https://i.imgur.com/riQCRuO.jpeg" alt="Aerial luxury residential rink"><span class="gallery-item-label">Luxury Residential — Aerial</span></div>
+        </div>
+      </div>
+    </section>
+    <div class="cta-banner"><h2>Start Your Project</h2><p>Ready to see your own rink in our portfolio?</p><button class="btn btn-white" onclick="go('contact')">Get a Free Estimate</button></div>
+  </div><!-- /pg-projects -->
+
+  <!-- CONTACT -->
+  <div id="pg-contact" style="display:none">
+    <section style="background:var(--navy);padding:80px 40px 60px">
+      <div class="section-inner"><p class="section-label" style="color:#7db3e8">Get in Touch</p><h1 class="section-title" style="color:var(--white);font-size:clamp(2rem,5vw,3.2rem)">Contact Home Ice North America</h1></div>
+    </section>
+    <section>
+      <div class="section-inner">
+        <div class="contact-grid">
+          <div class="contact-form">
+            <h2 style="color:var(--navy);font-size:1.2rem;margin-bottom:24px;font-weight:700">Send Us a Message</h2>
+            <div class="form-row">
+              <div class="form-group"><label for="firstName">First Name *</label><input type="text" id="firstName" autocomplete="given-name" placeholder="First Name"></div>
+              <div class="form-group"><label for="lastName">Last Name *</label><input type="text" id="lastName" autocomplete="family-name" placeholder="Last Name"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label for="phone">Phone *</label><input type="tel" id="phone" autocomplete="tel" placeholder="(555) 000-0000"></div>
+              <div class="form-group"><label for="email">Email *</label><input type="email" id="email" autocomplete="email" placeholder="you@email.com"></div>
+            </div>
+            <div class="form-group"><label for="projectType">Project Type</label><select id="projectType"><option>New Installation</option><option>Pre-Owned System</option><option>Maintenance</option><option>Court Combo</option><option>General Inquiry</option></select></div>
+            <div class="form-group"><label for="message">Message</label><textarea id="message" placeholder="Tell us about your project..."></textarea></div>
+            <button class="btn btn-primary" style="width:100%;font-size:1rem;padding:16px">Send Message</button>
+          </div>
+          <div>
+            <h2 style="color:var(--navy);font-size:1.2rem;margin-bottom:20px;font-weight:700">We're Here to Help</h2>
+            <div class="contact-detail"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.89 9.11 19.79 19.79 0 01.82.5 2 2 0 012.81 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l.91-.91a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><strong>Phone</strong><span><a href="tel:+19174552007" style="color:var(--gray);text-decoration:none">917-455-2007</a></span></div></div>
+            <div class="contact-detail"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><strong>Email</strong><span><a href="mailto:info@homeicenorthamerica.com" style="color:var(--gray);text-decoration:none">info@homeicenorthamerica.com</a></span></div></div>
+            <div class="contact-detail"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><strong>Service Area</strong><span>NY Tri-State — Full Service<br>Nationwide — Supply &amp; Install</span></div></div>
+            <div style="margin-top:32px;background:var(--ice);border-radius:var(--radius);padding:24px">
+              <h3 style="color:var(--navy);font-size:.95rem;margin-bottom:12px">Follow Us</h3>
+              <div class="social-links">
+                <a href="https://www.facebook.com/homeicenorthamerica" target="_blank" rel="noopener" aria-label="Facebook" style="border-color:#1B3F6E33"><svg viewBox="0 0 24 24" style="fill:#1B3F6E"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+                <a href="https://www.instagram.com/homeicenorthamerica/" target="_blank" rel="noopener" aria-label="Instagram" style="border-color:#1B3F6E33"><svg viewBox="0 0 24 24" style="fill:#1B3F6E"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4" style="fill:none;stroke:#1B3F6E;stroke-width:2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a>
+                <a href="https://www.linkedin.com/company/home-ice-north-america/" target="_blank" rel="noopener" aria-label="LinkedIn" style="border-color:#1B3F6E33"><svg viewBox="0 0 24 24" style="fill:#1B3F6E"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div></div></section>
-  </main>
-</div>
+    </section>
+  </div><!-- /pg-contact -->
 
-<!-- ══ CLIENT PORTAL ══ -->
-<div id="page-clients" class="page" role="region" aria-label="Client portal">
-  <div id="clientLogin" class="portal-login-wrap">
-    <div class="portal-login-box" role="main">
-      <img id="portalLogo" alt="HINA – Home Ice North America logo" style="max-width:180px;width:70%;margin:0 auto 24px;display:block">
-      <h1 style="color:var(--navy);font-size:1.4rem;font-weight:800;margin-bottom:6px">Client Portal</h1>
-      <p style="color:var(--gray);font-size:.88rem;margin-bottom:28px">Home Ice North America — Current Clients</p>
-      <div class="form-group" style="text-align:left">
-        <label for="clientPw" style="font-size:.82rem;font-weight:600;color:var(--navy)">Password</label>
-        <input type="password" id="clientPw" name="clientPw" autocomplete="current-password" placeholder="Enter your client password" style="width:100%;border:1.5px solid #c8d8ec;border-radius:8px;padding:12px 14px;font-size:.95rem;outline:none;font-family:var(--font)" onkeydown="if(event.key==='Enter')checkLogin()">
-      </div>
-      <div id="loginErr" role="alert" aria-live="polite" style="color:var(--red);font-size:.82rem;margin-bottom:12px;display:none">Incorrect password. Please try again.</div>
-      <button onclick="checkLogin()" class="btn btn-primary" style="width:100%;font-size:1rem;padding:14px">Sign In</button>
-      <p style="margin-top:20px;font-size:.78rem;color:#888">Don't have your password? <a href="#" onclick="showPage('contact')" style="color:var(--navy);font-weight:600">Contact HINA</a></p>
-    </div>
-  </div>
-  <div id="clientContent" style="display:none">
-    <section style="background:var(--navy);padding:60px 40px 50px"><div class="section-inner" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
-      <div><p class="section-label" style="color:#7db3e8">Home Ice North America</p><h1 class="section-title" style="color:var(--white);font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:8px">Weekly Ice Report</h1><p id="reportDateRange" style="color:rgba(255,255,255,.6);font-size:.9rem"></p></div>
-      <button onclick="doLogout()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:8px;padding:9px 18px;font-size:.82rem;cursor:pointer;font-family:var(--font)">Sign Out</button>
-    </div></section>
-    <section style="background:var(--white);padding:60px 40px"><div class="section-inner">
-      <p class="section-label">This Week's Skating Conditions</p>
-      <h2 class="section-title">Daily Color Assignments</h2>
-      <div role="legend" style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:36px">
-        <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#22a84a;border-radius:50%;display:inline-block"></span><span style="font-size:.82rem;color:var(--gray);font-weight:600">Green — Great skating</span></div>
-        <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#f0b429;border-radius:50%;display:inline-block"></span><span style="font-size:.82rem;color:var(--gray);font-weight:600">Yellow — Skate with caution</span></div>
-        <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#e53e3e;border-radius:50%;display:inline-block"></span><span style="font-size:.82rem;color:var(--gray);font-weight:600">Red — Do not skate</span></div>
-      </div>
-      <div id="calendarGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px" role="list"></div>
-    </div></section>
-    <section style="background:var(--ice);padding:60px 40px"><div class="section-inner"><div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
-      <div><p class="section-label">Conditions</p><h2 class="section-title" style="font-size:1.6rem">Ice Conditions &amp; Weather</h2><div id="conditionsText" style="background:var(--white);border-radius:var(--radius);padding:24px;margin-top:20px;box-shadow:0 2px 12px rgba(27,63,110,.07);font-size:.92rem;color:#444;line-height:1.8"></div></div>
-      <div><p class="section-label">Reminders</p><h2 class="section-title" style="font-size:1.6rem">Upcoming Maintenance</h2><div id="remindersText" style="background:var(--white);border-radius:var(--radius);padding:24px;margin-top:20px;box-shadow:0 2px 12px rgba(27,63,110,.07)"></div></div>
+  <!-- PRE-OWNED (accessible from services card, not nav) -->
+  <div id="pg-preowned" style="display:none">
+    <section style="background:var(--navy);padding:80px 40px 60px"><div class="section-inner"><p class="section-label" style="color:#7db3e8">Buy or Sell</p><h1 class="section-title" style="color:var(--white);font-size:clamp(2rem,5vw,3.2rem)">Pre-Owned Ice Rink Systems</h1></div></section>
+    <section><div class="section-inner"><div class="split">
+      <div><p class="section-label">Sell Your Rink</p><h2 class="section-title">Process of Selling Your Pre-Owned Ice Rink</h2><p class="section-sub">Many of our residential clients "outgrow" their home rinks and seek to recoup their investment. Our team will help list your rink with transparent terms. We get inquiries from across the US and Canada weekly.</p><button class="btn btn-primary" style="margin-top:24px" onclick="go('contact')">List My Rink</button></div>
+      <div class="split-img"><img src="https://i.imgur.com/LT2kzEL.jpeg" alt="HINA rink with glass boards"></div>
     </div></div></section>
-    <section style="padding:40px;background:var(--white)"><div class="section-inner" style="text-align:center"><p style="color:var(--gray);font-size:.88rem;margin-bottom:12px">View past reports in your email or the full archive:</p><a id="mailchimpLink" href="#" target="_blank" rel="noopener" class="btn btn-primary" style="display:inline-block">View Email Archive →</a></div></section>
-  </div>
-</div>
+    <section style="background:var(--ice)"><div class="section-inner">
+      <p class="section-label">Why Buy Pre-Owned</p><h2 class="section-title">Everything Managed For You</h2>
+      <div class="preowned-features">
+        <div class="po-feat"><h4>Vetted Inventory</h4><p>Every pre-owned system is inspected before listing.</p></div>
+        <div class="po-feat"><h4>Nationwide Buyers</h4><p>Our database spans the US and Canada — hundreds of qualified buyers.</p></div>
+        <div class="po-feat"><h4>Installation Included</h4><p>We coordinate full installation at the new location — turn-key service.</p></div>
+      </div>
+    </div></section>
+    <div class="cta-banner"><h2>Recoup Your Investment</h2><p>HINA will facilitate the listing and sale of your rink.</p><button class="btn btn-white" onclick="go('contact')">Get In Touch</button></div>
+  </div><!-- /pg-preowned -->
+
+  <!-- CLIENT PORTAL -->
+  <div id="pg-clients" style="display:none">
+    <div id="clientLogin" class="portal-login-wrap">
+      <div class="portal-login-box">
+        <img src="https://i.imgur.com/A6TnMMG.png" alt="HINA logo" style="max-width:180px;width:70%;margin:0 auto 24px;display:block">
+        <h1 style="color:var(--navy);font-size:1.4rem;font-weight:800;margin-bottom:6px">Client Portal</h1>
+        <p style="color:var(--gray);font-size:.88rem;margin-bottom:28px">Home Ice North America — Current Clients</p>
+        <div class="form-group" style="text-align:left">
+          <label for="clientPw" style="font-size:.82rem;font-weight:600;color:var(--navy)">Password</label>
+          <input type="password" id="clientPw" placeholder="Enter your client password" style="width:100%" onkeydown="if(event.key==='Enter')checkLogin()">
+        </div>
+        <div id="loginErr" style="color:var(--red);font-size:.82rem;margin-bottom:12px;display:none">Incorrect password. Please try again.</div>
+        <button onclick="checkLogin()" class="btn btn-primary" style="width:100%;font-size:1rem;padding:14px">Sign In</button>
+        <p style="margin-top:20px;font-size:.78rem;color:#888">Don't have your password? <a onclick="go('contact')" style="color:var(--navy);font-weight:600;cursor:pointer">Contact HINA</a></p>
+      </div>
+    </div>
+    <div id="clientContent" style="display:none">
+      <section style="background:var(--navy);padding:60px 40px 50px"><div class="section-inner" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
+        <div><p class="section-label" style="color:#7db3e8">Home Ice North America</p><h1 class="section-title" style="color:var(--white);margin-bottom:8px">Weekly Ice Report</h1><p id="reportDateRange" style="color:rgba(255,255,255,.6);font-size:.9rem"></p></div>
+        <button onclick="doLogout()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:8px;padding:9px 18px;font-size:.82rem;cursor:pointer;font-family:var(--font)">Sign Out</button>
+      </div></section>
+      <section style="background:var(--white)"><div class="section-inner">
+        <p class="section-label">This Week's Skating Conditions</p>
+        <h2 class="section-title">Daily Color Assignments</h2>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:36px">
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#22a84a;border-radius:50%;display:inline-block"></span><span style="font-size:.82rem;color:var(--gray);font-weight:600">Green — Great skating</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#f0b429;border-radius:50%;display:inline-block"></span><span style="font-size:.82rem;color:var(--gray);font-weight:600">Yellow — Skate with caution</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#e53e3e;border-radius:50%;display:inline-block"></span><span style="font-size:.82rem;color:var(--gray);font-weight:600">Red — Do not skate</span></div>
+        </div>
+        <div id="calendarGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px"></div>
+      </div></section>
+      <section style="background:var(--ice)"><div class="section-inner"><div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+        <div><p class="section-label">Conditions</p><h2 class="section-title" style="font-size:1.6rem">Ice Conditions &amp; Weather</h2><div id="conditionsText" style="background:var(--white);border-radius:var(--radius);padding:24px;margin-top:20px;box-shadow:0 2px 12px rgba(27,63,110,.07);font-size:.92rem;color:#444;line-height:1.8"></div></div>
+        <div><p class="section-label">Reminders</p><h2 class="section-title" style="font-size:1.6rem">Upcoming Maintenance</h2><div id="remindersText" style="background:var(--white);border-radius:var(--radius);padding:24px;margin-top:20px;box-shadow:0 2px 12px rgba(27,63,110,.07)"></div></div>
+      </div></div></section>
+    </div>
+  </div><!-- /pg-clients -->
+
+</div><!-- /page-wrapper -->
 
 <!-- FOOTER -->
-<footer role="contentinfo">
+<footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <img id="footerLogo" class="footer-logo" alt="HINA – Home Ice North America logo">
+      <img src="https://i.imgur.com/A6TnMMG.png" class="footer-logo" alt="HINA logo">
       <p>We professionally install refrigerated ice rinks for residential and commercial use — nationwide supply and install, full service in the NY Tri-State area.</p>
     </div>
-    <nav class="footer-col" aria-label="Footer site pages">
+    <nav class="footer-col" aria-label="Pages">
       <h3>Pages</h3>
       <ul>
-        <li><a href="#" onclick="showPage('home')">Home</a></li>
-        <li><a href="#" onclick="showPage('about')">About</a></li>
-        <li><a href="#" onclick="showPage('process')">Our Process</a></li>
-        <li><a href="#" onclick="showPage('projects')">Projects</a></li>
-        <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+        <li><a onclick="go('home')">Home</a></li>
+        <li><a onclick="go('about')">About</a></li>
+        <li><a onclick="go('process')">Our Process</a></li>
+        <li><a onclick="go('projects')">Projects</a></li>
+        <li><a onclick="go('contact')">Contact Us</a></li>
       </ul>
     </nav>
-    <nav class="footer-col" aria-label="Footer services">
+    <nav class="footer-col" aria-label="Services">
       <h3>Services</h3>
       <ul>
-        <li><a href="#" onclick="showPage('process')">New Installation</a></li>
-        <li><a href="#" onclick="showPage('process')">Maintenance</a></li>
-        <li><a href="#" onclick="showPage('contact')">Get an Estimate</a></li>
+        <li><a onclick="go('process')">New Installation</a></li>
+        <li><a onclick="go('process')">Maintenance</a></li>
+        <li><a onclick="go('contact')">Get an Estimate</a></li>
       </ul>
     </nav>
     <div class="footer-col">
       <h3>Service Areas</h3>
       <ul>
-        <li><a href="#">Westchester County, NY</a></li>
-        <li><a href="#">Fairfield County, CT</a></li>
-        <li><a href="#">Bergen County, NJ</a></li>
-        <li><a href="#">Morris County, NJ</a></li>
-        <li><a href="#">Nationwide</a></li>
+        <li><a>Westchester County, NY</a></li>
+        <li><a>Fairfield County, CT</a></li>
+        <li><a>Bergen County, NJ</a></li>
+        <li><a>Morris County, NJ</a></li>
+        <li><a>Nationwide</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <p>© 2026 Home Ice North America. All Rights Reserved. &nbsp;·&nbsp;
-      <a href="https://www.notambranding.com" target="_blank" rel="noopener noreferrer">Designed + Operated by Notam Branding LLC</a>
+      <a href="https://www.notambranding.com" target="_blank" rel="noopener">Designed + Operated by Notam Branding LLC</a>
     </p>
-    <div class="social-links" aria-label="HINA social media links">
-      <a href="https://www.facebook.com/homeicenorthamerica" target="_blank" rel="noopener noreferrer" aria-label="HINA on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-      <a href="https://www.instagram.com/homeicenorthamerica/" target="_blank" rel="noopener noreferrer" aria-label="HINA on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4" style="fill:none;stroke:rgba(255,255,255,.65);stroke-width:2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a>
-      <a href="https://www.linkedin.com/company/home-ice-north-america/" target="_blank" rel="noopener noreferrer" aria-label="HINA on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <div class="social-links">
+      <a href="https://www.facebook.com/homeicenorthamerica" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="https://www.instagram.com/homeicenorthamerica/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4" style="fill:none;stroke:rgba(255,255,255,.65);stroke-width:2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a>
+      <a href="https://www.linkedin.com/company/home-ice-north-america/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
     </div>
   </div>
 </footer>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    ["navLogo","heroLogoWatermark","portalLogo","footerLogo"].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.src = LOGO_URL;
-    });
+const PAGES = ['home','about','process','projects','contact','preowned','clients'];
+
+function go(id) {
+  // Hide all pages
+  PAGES.forEach(p => {
+    const el = document.getElementById('pg-' + p);
+    if (el) el.style.display = 'none';
   });
-
-  // ── NAV HELPERS ──
-  function toggleMenu() {
-    const menu = document.getElementById("mobileMenu");
-    const btn  = document.getElementById("hamburger");
-    const open = menu.classList.toggle("open");
-    btn.classList.toggle("open", open);
-    btn.setAttribute("aria-expanded", open ? "true" : "false");
-    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  }
-
-  function closeMenu() {
-    const menu = document.getElementById("mobileMenu");
-    const btn  = document.getElementById("hamburger");
-    menu.classList.remove("open");
-    btn.classList.remove("open");
-    btn.setAttribute("aria-expanded", "false");
-    btn.setAttribute("aria-label", "Open menu");
-  }
-
-  // Navigate from mobile menu
-  function navTo(id) {
-    showPage(id);
-    closeMenu();
-  }
-
-  // Close menu when clicking outside
-  document.addEventListener("click", function(e) {
-    const menu = document.getElementById("mobileMenu");
-    const btn  = document.getElementById("hamburger");
-    if (menu.classList.contains("open") && !menu.contains(e.target) && !btn.contains(e.target)) {
-      closeMenu();
-    }
+  // Show target page
+  const target = document.getElementById('pg-' + id);
+  if (target) target.style.display = 'block';
+  // Update nav active state
+  document.querySelectorAll('#site-nav ul a[data-page]').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('data-page') === id);
   });
+  // Scroll to top
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  // Close mobile menu
+  document.getElementById('mobile-drawer').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('hamburger').setAttribute('aria-expanded','false');
+  document.getElementById('hamburger').setAttribute('aria-label','Open menu');
+}
 
-  // Wire hamburger button
-  document.getElementById("hamburger").addEventListener("click", toggleMenu);
+// Hamburger
+document.getElementById('hamburger').addEventListener('click', function() {
+  const drawer = document.getElementById('mobile-drawer');
+  const isOpen = drawer.classList.toggle('open');
+  this.classList.toggle('open', isOpen);
+  this.setAttribute('aria-expanded', isOpen);
+  this.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+});
 
-  // ── PAGE SWITCHING ──
-  function showPage(id) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    const target = document.getElementById("page-" + id);
-    if (target) target.classList.add("active");
-    document.querySelectorAll(".nav-links a[data-page]").forEach(a => {
-      a.setAttribute("aria-current", a.getAttribute("data-page") === id ? "page" : "false");
-    });
-    window.scrollTo({top: 0, behavior: "smooth"});
-    closeMenu();
-    // Focus management for accessibility
-    const main = document.querySelector("#page-" + id + " [id^='main-content']");
-    if (main) { main.setAttribute("tabindex", "-1"); main.focus(); }
+// Close drawer on outside click
+document.addEventListener('click', function(e) {
+  const drawer = document.getElementById('mobile-drawer');
+  const btn = document.getElementById('hamburger');
+  if (drawer.classList.contains('open') && !drawer.contains(e.target) && !btn.contains(e.target)) {
+    drawer.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-label','Open menu');
   }
+});
 
-  // ── CLIENT PORTAL ──
-  const REPORT = {
-    password: "mimi",
-    weekStart: "2024-01-08",
-    mailchimpArchive: "https://mailchimp.com/",
-    days: [
-      { day:"Mon", color:"green",  note:"" },
-      { day:"Tue", color:"green",  note:"" },
-      { day:"Wed", color:"yellow", note:"Mild temps" },
-      { day:"Thu", color:"yellow", note:"" },
-      { day:"Fri", color:"green",  note:"" },
-      { day:"Sat", color:"green",  note:"" },
-      { day:"Sun", color:"red",    note:"Rain forecast" }
-    ],
-    conditions: "Ice is in good shape heading into the week. Temperatures expected to stay below freezing Monday through Friday.",
-    reminders: [
-      "❄️ Zamboni service scheduled Monday — please clear the rink by 7am.",
-      "🔧 Refrigeration unit inspection coming Jan 15.",
-      "📅 Seasonal breakdown planning begins in March."
-    ]
-  };
-
-  const COLOR_MAP = {
-    green:  { bg:"#22a84a", light:"#e8f8ed", text:"#166534", label:"Great Skating" },
-    yellow: { bg:"#f0b429", light:"#fefce8", text:"#92400e", label:"Caution" },
-    red:    { bg:"#e53e3e", light:"#fff5f5", text:"#9b1c1c", label:"Off Ice" }
-  };
-
-  function buildCalendar() {
-    const grid = document.getElementById("calendarGrid");
-    if (!grid) return;
-    grid.innerHTML = "";
-    const start = new Date(REPORT.weekStart + "T12:00:00");
-    REPORT.days.forEach((d, i) => {
-      const date = new Date(start);
-      date.setDate(start.getDate() + i);
-      const mm = date.getMonth()+1, dd = date.getDate();
-      const c = COLOR_MAP[d.color] || COLOR_MAP.green;
-      const item = document.createElement("div");
-      item.setAttribute("role","listitem");
-      item.setAttribute("aria-label",`${d.day}, ${mm}/${dd}: ${c.label}${d.note ? ", "+d.note:""}`);
-      item.style.cssText = `background:${c.light};border:2px solid ${c.bg};border-radius:12px;padding:16px 10px;text-align:center`;
-      item.innerHTML =
-        `<div style="font-size:.75rem;font-weight:700;color:${c.text};text-transform:uppercase;letter-spacing:1px;margin-bottom:4px" aria-hidden="true">${d.day}</div>`+
-        `<div style="font-size:.78rem;color:#666;margin-bottom:10px" aria-hidden="true">${mm}/${dd}</div>`+
-        `<div style="width:36px;height:36px;background:${c.bg};border-radius:50%;margin:0 auto 8px" aria-hidden="true"></div>`+
-        `<div style="font-size:.72rem;font-weight:700;color:${c.text}" aria-hidden="true">${c.label}</div>`+
-        (d.note?`<div style="font-size:.68rem;color:#888;margin-top:5px" aria-hidden="true">${d.note}</div>`:"");
-      grid.appendChild(item);
-    });
-    const end = new Date(start); end.setDate(start.getDate()+6);
-    const fmt = d => d.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
-    document.getElementById("reportDateRange").textContent = `Week of ${fmt(start)} – ${fmt(end)}`;
-    document.getElementById("conditionsText").textContent = REPORT.conditions;
-    document.getElementById("remindersText").innerHTML = REPORT.reminders.map(r =>
-      `<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #eef2f8;font-size:.88rem;color:#444;line-height:1.6">${r}</div>`
-    ).join("") + `<p style="font-size:.75rem;color:#bbb;margin-top:12px">Questions? Reply to your weekly email or contact us directly.</p>`;
-    document.getElementById("mailchimpLink").href = REPORT.mailchimpArchive;
+// Client portal
+const REPORT = {
+  password:"mimi",
+  weekStart:"2024-01-08",
+  days:[
+    {day:"Mon",color:"green",note:""},
+    {day:"Tue",color:"green",note:""},
+    {day:"Wed",color:"yellow",note:"Mild temps"},
+    {day:"Thu",color:"yellow",note:""},
+    {day:"Fri",color:"green",note:""},
+    {day:"Sat",color:"green",note:""},
+    {day:"Sun",color:"red",note:"Rain forecast"}
+  ],
+  conditions:"Ice is in good shape heading into the week. Temperatures expected to stay below freezing Monday through Friday.",
+  reminders:[
+    "❄️ Zamboni service scheduled Monday — please clear the rink by 7am.",
+    "🔧 Refrigeration unit inspection coming Jan 15.",
+    "📅 Seasonal breakdown planning begins in March."
+  ]
+};
+const COLOR_MAP={
+  green:{bg:"#22a84a",light:"#e8f8ed",text:"#166534",label:"Great Skating"},
+  yellow:{bg:"#f0b429",light:"#fefce8",text:"#92400e",label:"Caution"},
+  red:{bg:"#e53e3e",light:"#fff5f5",text:"#9b1c1c",label:"Off Ice"}
+};
+function buildCalendar(){
+  const grid=document.getElementById("calendarGrid");
+  if(!grid)return;
+  grid.innerHTML="";
+  const start=new Date(REPORT.weekStart+"T12:00:00");
+  REPORT.days.forEach((d,i)=>{
+    const date=new Date(start);date.setDate(start.getDate()+i);
+    const mm=date.getMonth()+1,dd=date.getDate();
+    const c=COLOR_MAP[d.color]||COLOR_MAP.green;
+    const item=document.createElement("div");
+    item.style.cssText=`background:${c.light};border:2px solid ${c.bg};border-radius:12px;padding:16px 10px;text-align:center`;
+    item.innerHTML=`<div style="font-size:.75rem;font-weight:700;color:${c.text};text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">${d.day}</div>`+
+      `<div style="font-size:.78rem;color:#666;margin-bottom:10px">${mm}/${dd}</div>`+
+      `<div style="width:36px;height:36px;background:${c.bg};border-radius:50%;margin:0 auto 8px"></div>`+
+      `<div style="font-size:.72rem;font-weight:700;color:${c.text}">${c.label}</div>`+
+      (d.note?`<div style="font-size:.68rem;color:#888;margin-top:5px">${d.note}</div>`:"");
+    grid.appendChild(item);
+  });
+  const end=new Date(start);end.setDate(start.getDate()+6);
+  const fmt=d=>d.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  document.getElementById("reportDateRange").textContent=`Week of ${fmt(start)} – ${fmt(end)}`;
+  document.getElementById("conditionsText").textContent=REPORT.conditions;
+  document.getElementById("remindersText").innerHTML=REPORT.reminders.map(r=>
+    `<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #eef2f8;font-size:.88rem;color:#444;line-height:1.6">${r}</div>`
+  ).join("")+`<p style="font-size:.75rem;color:#bbb;margin-top:12px">Questions? Reply to your weekly email or contact us directly.</p>`;
+}
+function checkLogin(){
+  if(document.getElementById("clientPw").value===REPORT.password){
+    document.getElementById("clientLogin").style.display="none";
+    document.getElementById("clientContent").style.display="block";
+    buildCalendar();
+  }else{
+    document.getElementById("loginErr").style.display="block";
   }
-
-  function checkLogin() {
-    if (document.getElementById("clientPw").value === REPORT.password) {
-      document.getElementById("clientLogin").style.display = "none";
-      document.getElementById("clientContent").style.display = "block";
-      buildCalendar();
-    } else {
-      document.getElementById("loginErr").style.display = "block";
-    }
-  }
-
-  function doLogout() {
-    document.getElementById("clientContent").style.display = "none";
-    document.getElementById("clientLogin").style.display = "flex";
-    document.getElementById("clientPw").value = "";
-  }
+}
+function doLogout(){
+  document.getElementById("clientContent").style.display="none";
+  document.getElementById("clientLogin").style.display="flex";
+  document.getElementById("clientPw").value="";
+}
 </script>
 </body>
 </html>
