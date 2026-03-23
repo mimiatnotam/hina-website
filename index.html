@@ -79,7 +79,6 @@ section{padding:80px 40px}
 .service-icon svg{width:26px;height:26px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .service-card h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:10px}
 .service-card p{font-size:.88rem;color:var(--gray);line-height:1.7}
-.service-card .card-link{display:inline-block;margin-top:14px;font-size:.78rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px}
 
 /* BENEFITS */
 .benefits-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
@@ -292,13 +291,12 @@ footer{background:var(--navy-dark);padding:60px 40px 30px}
           <span class="hero-badge">Bringing Hockey Home</span>
           <h1 class="hero-title">We Professionally Install Refrigerated Ice Rinks</h1>
           <p class="hero-sub">Let Us Help Create Memories That Will Last a Lifetime</p>
-          <p class="hero-desc">Custom refrigerated rinks for residential and commercial use — supply and install nationwide, full service in the NY Tri-State area.</p>
           <div class="hero-btns">
             <button class="btn btn-primary" onclick="go('contact')">Get a Free Estimate</button>
             <button class="btn btn-outline" onclick="document.getElementById('homeVideos').scrollIntoView({behavior:'smooth'})">Watch Our Work</button>
           </div>
         </div>
-        <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><span class="scroll-arrow"></span></div>
+        <div class="scroll-hint" aria-hidden="true" onclick="document.getElementById('homeVideos').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><span>Scroll</span><span class="scroll-arrow"></span></div>
       </div>
 
       <div class="stats-bar">
@@ -332,36 +330,31 @@ footer{background:var(--navy-dark);padding:60px 40px 30px}
         <div class="section-inner">
           <p class="section-label">What We Offer</p>
           <h2 class="section-title">Complete Ice Rink Solutions</h2>
+          <p class="section-sub" style="margin-bottom:0">Custom refrigerated rinks for residential and commercial use — supply and install nationwide, full service in the NY Tri-State area.</p>
           <div class="services-grid">
             <div class="service-card" onclick="go('projects')">
               <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
               <h3>Custom Installation</h3><p>We consult, design, and install fully custom rinks for any property. Indoor or outdoor, permanent or portable.</p>
-              <span class="card-link">See Our Projects →</span>
             </div>
             <div class="service-card" onclick="go('process')">
               <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
               <h3>At-Home Maintenance</h3><p>Seasonal setup, daily maintenance, mechanical service, and storage management — we keep your ice perfect.</p>
-              <span class="card-link">Our Process →</span>
             </div>
             <div class="service-card" onclick="goContact('Pre-Owned System')">
               <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
               <h3>Pre-Owned Systems</h3><p>Recoup your investment by listing your rink through HINA. Buyers across the US and Canada every week.</p>
-              <span class="card-link">Get In Touch →</span>
             </div>
             <div class="service-card" onclick="goContact('General Contracting')">
               <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
               <h3>General Contracting</h3><p>We handle the entire GC process or integrate with your existing contractor — end-to-end project management.</p>
-              <span class="card-link">Get In Touch →</span>
             </div>
             <div class="service-card" onclick="goContact('Court/Rink Combo')">
               <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
               <h3>Court/Rink Combos</h3><p>Convert your rink space to a year-round court for racket sports, soccer, or lacrosse during off-ice months.</p>
-              <span class="card-link">Get In Touch →</span>
             </div>
             <div class="service-card" onclick="goContact('Expert Consultation')">
               <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
               <h3>Expert Consultation</h3><p>Not sure where to start? Our team guides you through every decision with no pressure, just answers.</p>
-              <span class="card-link">Get In Touch →</span>
             </div>
           </div>
         </div>
@@ -398,7 +391,7 @@ footer{background:var(--navy-dark);padding:60px 40px 30px}
       <div class="testimonials-section">
         <div class="section-inner">
           <p class="section-label">What Clients Say</p>
-          <h2 class="section-title">From Backyards to Ballrooms. Every Rink Has a Story.</h2>
+          <h2 class="section-title">Every Rink Has a Home.</h2>
           <div class="testimonial-grid">
             <div class="testimonial"><div class="puck"></div><blockquote>"Working with HINA was an excellent experience. My entire family uses the rink and my kids couldn't be happier."</blockquote><cite>— Anthony, Scarsdale NY</cite></div>
             <div class="testimonial"><div class="puck"></div><blockquote>"From first call to first skate, the team was professional, communicative, and delivered exactly what they promised."</blockquote><cite>— Client, Fairfield County CT</cite></div>
@@ -520,12 +513,32 @@ footer{background:var(--navy-dark);padding:60px 40px 30px}
         <p class="section-label">Photo Gallery</p>
         <h2 class="section-title">From Our Portfolio</h2>
         <div class="gallery">
-          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/xiTFe06.jpeg')"><img src="https://i.imgur.com/xiTFe06.jpeg" alt="Hockey game action"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/xiTFe06.jpeg')"><img src="https://i.imgur.com/xiTFe06.jpeg" alt="HINA rink"></div>
           <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/UIZcBTp.jpeg')"><img src="https://i.imgur.com/UIZcBTp.jpeg" alt="Players at the bench"><span class="gallery-item-label">Community &amp; Camaraderie</span></div>
-          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/pjmK8ER.jpeg')"><img src="https://i.imgur.com/pjmK8ER.jpeg" alt="Overhead game view"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/pjmK8ER.jpeg')"><img src="https://i.imgur.com/pjmK8ER.jpeg" alt="HINA rink"></div>
           <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/EderU91.jpeg')"><img src="https://i.imgur.com/EderU91.jpeg" alt="Player on ice"><span class="gallery-item-label">On the Ice</span></div>
-          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/LT2kzEL.jpeg')"><img src="https://i.imgur.com/LT2kzEL.jpeg" alt="Fresh install"></div>
-          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/riQCRuO.jpeg')"><img src="https://i.imgur.com/riQCRuO.jpeg" alt="Aerial view of rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/LT2kzEL.jpeg')"><img src="https://i.imgur.com/LT2kzEL.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/riQCRuO.jpeg')"><img src="https://i.imgur.com/riQCRuO.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/yCs1ArS.jpeg')"><img src="https://i.imgur.com/yCs1ArS.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/yCs1ArS.jpeg')"><img src="https://i.imgur.com/yCs1ArS.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/ItyIUXC.jpeg')"><img src="https://i.imgur.com/ItyIUXC.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/D2SYkka.jpeg')"><img src="https://i.imgur.com/D2SYkka.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/e6kR4pD.jpeg')"><img src="https://i.imgur.com/e6kR4pD.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/fGc32kg.jpeg')"><img src="https://i.imgur.com/fGc32kg.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/IjkUJ2A.jpeg')"><img src="https://i.imgur.com/IjkUJ2A.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/7mdoPow.jpeg')"><img src="https://i.imgur.com/7mdoPow.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/dnuBH52.jpeg')"><img src="https://i.imgur.com/dnuBH52.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/IcLVC7f.jpeg')"><img src="https://i.imgur.com/IcLVC7f.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/IJUqMCW.jpeg')"><img src="https://i.imgur.com/IJUqMCW.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/b7cQ8cm.jpeg')"><img src="https://i.imgur.com/b7cQ8cm.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/fNNdocg.jpeg')"><img src="https://i.imgur.com/fNNdocg.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/iysgzSE.jpeg')"><img src="https://i.imgur.com/iysgzSE.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/x4Ut8gJ.jpeg')"><img src="https://i.imgur.com/x4Ut8gJ.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/Y1F9XuX.jpeg')"><img src="https://i.imgur.com/Y1F9XuX.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/9a2Zwm2.jpeg')"><img src="https://i.imgur.com/9a2Zwm2.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/Zb0Zz0x.jpeg')"><img src="https://i.imgur.com/Zb0Zz0x.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/6EfaFhP.jpeg')"><img src="https://i.imgur.com/6EfaFhP.jpeg" alt="HINA rink"></div>
+          <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/rQuT3db.jpeg')"><img src="https://i.imgur.com/rQuT3db.jpeg" alt="HINA rink"></div>
         </div>
       </div>
     </section>
