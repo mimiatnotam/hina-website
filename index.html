@@ -25,16 +25,16 @@ body{font-family:var(--font);color:var(--dark);background:var(--white);overflow-
 .skip-link:focus{top:10px}
 
 /* NAV */
-#site-nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:#1B3F6E;display:flex;align-items:center;justify-content:space-between;padding:0 40px;box-shadow:0 2px 16px rgba(0,0,0,.3);z-index:99999;}
+#site-nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 40px;box-shadow:0 2px 16px rgba(0,0,0,.12);z-index:99999;}
 #site-nav .nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
 #site-nav .nav-logo img{height:54px;width:auto;display:block}
 #site-nav ul{display:flex;gap:4px;list-style:none;align-items:center}
-#site-nav ul a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.82rem;font-weight:500;padding:6px 14px;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;white-space:nowrap;cursor:pointer;display:block}
-#site-nav ul a:hover,#site-nav ul a.active{color:#fff;background:rgba(255,255,255,.15)}
+#site-nav ul a{color:var(--navy);text-decoration:none;font-size:.82rem;font-weight:600;padding:6px 14px;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;white-space:nowrap;cursor:pointer;display:block}
+#site-nav ul a:hover,#site-nav ul a.active{color:var(--navy);background:var(--ice)}
 #site-nav ul a.nav-cta{background:#C0392B!important;color:#fff!important;font-weight:700!important;padding:8px 18px!important}
 #site-nav ul a.nav-cta:hover{background:#a93226!important}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
-.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .25s,opacity .25s}
+.hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:transform .25s,opacity .25s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
@@ -287,7 +287,7 @@ footer{background:var(--navy-dark);padding:60px 40px 30px}
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <img src="https://i.imgur.com/hs2KPfN.png" alt="HINA – Home Ice North America" style="width:clamp(180px,30vw,320px);margin:0 auto 28px;display:block;opacity:.95">
+          <img src="https://i.imgur.com/hs2KPfN.png" alt="HINA – Home Ice North America" style="width:clamp(180px,30vw,320px);margin:0 auto 28px;display:block;opacity:.95;filter:brightness(0) invert(1)">
           <span class="hero-badge">Bringing Hockey Home</span>
           <h1 class="hero-title">We Professionally Install Refrigerated Ice Rinks</h1>
           <p class="hero-sub">Let Us Help Create Memories That Will Last a Lifetime</p>
